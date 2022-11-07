@@ -1,0 +1,27 @@
+@font-face {
+  font-family: TTRoundsNeue;
+  font-style: normal;
+  font-weight: 100;
+  src: url(TTRoundsNeue-Thin.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: TTRoundsNeue;
+  font-style: normal;
+  font-weight: 400;
+  src: url(TTRoundsNeue-Regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: TTRoundsNeue;
+  font-style: normal;
+  font-weight: 700;
+  src: url(TTRoundsNeue-Bold.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: TTRoundsNeue;
+  font-style: normal;
+  font-weight: 800;
+  src: url(TTRoundsNeue-Black.woff2) format('woff2');
+}
