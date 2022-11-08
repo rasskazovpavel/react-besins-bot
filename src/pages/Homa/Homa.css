@@ -1,0 +1,54 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.page__header {
+  padding: 30px 30px 0;
+}
+
+.page__number-result {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 37px;
+  font-weight: bold;
+}
+
+.page__text-result {
+  text-align: center;
+  margin: 30px 0 50px;
+  font-size: 30px;
+}
+
+.page__info {
+  text-align: center;
+  font-size: 25px;
+  margin: 30px 0;
+}
+
+.colored {
+  color: #4e5994;
+  font-weight: bold;
+}
+
+.table {
+  display: flex;
+  gap: 2%;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.table__row {
+  margin: 10px 0;
+  height: 70px;
+}
+
+.table__column_left {
+  min-width: 120px;
+}
+
+.table__column_homa {
+  min-width: 80px;
+}

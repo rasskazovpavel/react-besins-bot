@@ -10,3 +10,8 @@
 .button_disabled {
   opacity: 0.6;
 }
+
+.button_transparent {
+  background-color: transparent;
+  color: #4e5994;
+}

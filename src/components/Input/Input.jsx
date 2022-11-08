@@ -4,30 +4,36 @@ import "./Input.css";
 
 import arrow from "../../images/arrow.png";
 
-function Input({ label }) {
-  const [value, setValue] = useState("");
-
+function Input({ label, name, onChange, values, setValues }) {
   return (
     <div className="input app__input">
       <p className="input__label">{label}</p>
       <input
         className="input__field"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        value={values[name] || ""}
+        onChange={onChange}
         type="number"
         min="0"
         placeholder="0"
+        name={name}
+        required
       />
       <div
         className="arrow arrow_up"
-        onClick={() => setValue((prev) => prev + 1)}
+        onClick={() => {
+          if (values[name] != undefined) {
+            setValues({ ...values, [name]: String(Number(values[name]) + 1) });
+          }
+        }}
       >
         <img className="arrow__image" src={arrow} alt="arrow" />
       </div>
       <div
         className="arrow arrow_down"
         onClick={() => {
-          if (value != 0) setValue((prev) => prev - 1);
+          if (values[name] != undefined && values[name] != 0) {
+            setValues({ ...values, [name]: String(Number(values[name]) - 1) });
+          }
         }}
       >
         <img
