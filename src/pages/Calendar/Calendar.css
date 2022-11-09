@@ -33,26 +33,14 @@
   font-weight: bold;
 }
 
-.table {
-  display: flex;
-  gap: 2%;
-  justify-content: center;
-  font-size: 22px;
+.page__note {
+  font-size: 18px;
 }
 
-.table_hypertens {
-  font-size: 18px
+.page__input-date {
+  width: 100%;
 }
 
-.table__row {
-  margin: 10px 0;
-  height: 70px;
-}
-
-.table__row_hypertens {
-  height: 50px;
-}
-
-.table__column_left {
-  min-width: 120px;
+.page__info_calendar {
+  text-align: left;
 }

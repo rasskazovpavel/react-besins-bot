@@ -7,7 +7,7 @@ import arrow from "../../images/arrow.png";
 function Input({ label, name, onChange, values, setValues }) {
   return (
     <div className="input app__input">
-      <p className="input__label">{label}</p>
+      <label className="input__label">{label}</label>
       <input
         className="input__field"
         value={values[name] || ""}

@@ -1,10 +1,14 @@
-
-
 .switch-field {
+  width: 100%;
   margin-bottom: 25px;
+  display: flex;
 }
 
-.switch-field input {
+.switch-field__wrapper {
+  width: 100%;
+}
+
+.switch-field div input {
   position: absolute !important;
   clip: rect(0, 0, 0, 0);
   height: 1px;
@@ -13,8 +17,10 @@
   overflow: hidden;
 }
 
-.switch-field label {
-  background-color: #e4e4e4;
+.switch-field div label {
+  display: block;
+  width: 100%;
+  background-color: #ffffff;
   color: rgba(0, 0, 0, 0.6);
   font-size: 14px;
   line-height: 1;
@@ -23,22 +29,26 @@
   margin-right: -1px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
-  transition: all 0.1s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
-.switch-field label:hover {
+.switch-field div label:hover {
   cursor: pointer;
 }
 
-.switch-field input:checked + label {
-  background-color: #a5dc86;
+.switch-field div input:checked + label {
+  background-color: #e3e7f9;
   box-shadow: none;
 }
 
-.switch-field label:first-of-type {
+.switch-field div:first-of-type label {
   border-radius: 4px 0 0 4px;
 }
 
-.switch-field label:last-of-type {
+.switch-field div:last-of-type label {
   border-radius: 0 4px 4px 0;
+}
+
+.question {
+  margin-bottom: 10px;
 }

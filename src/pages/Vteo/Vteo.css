@@ -40,19 +40,15 @@
   font-size: 22px;
 }
 
-.table_hypertens {
-  font-size: 18px
-}
-
 .table__row {
   margin: 10px 0;
   height: 70px;
 }
 
-.table__row_hypertens {
-  height: 50px;
-}
-
 .table__column_left {
   min-width: 120px;
+}
+
+.title_vteo {
+  margin-bottom: 40px;
 }

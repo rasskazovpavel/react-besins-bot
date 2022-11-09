@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import Title from "../../components/Title/Title.jsx";
-import Input from "../../components/Input/Input.jsx";
 import Button from "../../components/Button/Button.jsx";
+import Checkbox from "../../components/Checkbox/Checkbox.jsx";
 
 import useFormValidation from "../../hooks/useFormValidation";
 
-import { homaData, getIndexHoma } from "../../utils/constants";
+import {
+  vteoQuestions,
+  getWordEnding,
+  getIndexVteo,
+  vteoData,
+} from "../../utils/constants";
 
-import "./Homa.css";
+import "./Vteo.css";
 
-function Homa() {
+function Vteo() {
   const { handleChange, values, isFormValid, setValues } = useFormValidation();
   const isZeroInInputs = Object.values(values).includes("0");
   const [result, setResult] = useState(null);
@@ -23,49 +28,61 @@ function Homa() {
           noValidate
           onSubmit={(e) => {
             e.preventDefault();
-            const glucose = Number(values["glucose"]);
-            const insulin = Number(values["insulin"]);
-            const floatRes = (glucose * insulin) / 22.5;
-            setResult(floatRes.toFixed(1));
+            const tempArrayKeys = Object.keys(values);
+            const arrWithPoints = tempArrayKeys.map((key) =>
+              Number(key.split("-")[1])
+            );
+            const sum = arrWithPoints.reduce(
+              (total, amount) => total + Number(amount),
+              0
+            );
+            setResult(sum);
           }}
         >
           <div className="page__header">
-            <Title>Расчёт индекса инсулинорезистентности (HOMA-IR)</Title>
-            <Input
-              label="Глюкоза натощак, ммоль/л"
-              name="glucose"
-              onChange={handleChange}
-              values={values}
-              setValues={setValues}
-            />
-            <Input
-              label="Инсулин натощак, мкЕд/мл"
-              name="insulin"
-              onChange={handleChange}
-              values={values}
-              setValues={setValues}
-            />
+            <Title mod="title_vteo">
+              Шкала оценки риска ВТЭО (Венозных тромбоэмболических осложнений) у
+              нехирургических больных (шкала Падуа)
+            </Title>
+            <p className="page__green-hint">
+              Выберите, из перечисленного ниже то, что релевантно для пациента
+            </p>
+            {vteoQuestions.map((item) => {
+              return (
+                <Checkbox
+                  key={item.id}
+                  text={item.text}
+                  id={item.id}
+                  onChange={handleChange}
+                  value={`check${item.id}-${item.value}`}
+                />
+              );
+            })}
           </div>
           <div className="page__footer">
             <Button valid={isFormValid && !isZeroInInputs}>Расчитать</Button>
           </div>
         </form>
-      )}
+      )}{" "}
       {result && !showMoreInfo && (
         <div className="page">
           <div className="page__header">
             <Title mod="title_center">Результат</Title>
             <h2
-              style={{ color: `${homaData.color[getIndexHoma(result)]}` }}
+              style={{
+                color: `${vteoData.color[getIndexVteo(result)]}`,
+              }}
               className="page__number-result"
             >
-              HOMA-IR = {result}
+              {`${result} балл${getWordEnding(result)}`}
             </h2>
             <p
-              style={{ color: `${homaData.color[getIndexHoma(result)]}` }}
+              style={{
+                color: `${vteoData.color[getIndexVteo(result)]}`,
+              }}
               className="page__text-result"
             >
-              {homaData.textVerdict[getIndexHoma(result)]}
+              {vteoData.textVerdict[getIndexVteo(result)]}
             </p>
           </div>
           <div className="page__footer">
@@ -85,19 +102,18 @@ function Homa() {
           <div className="page__header">
             <Title mod="title_center">Интерпретация</Title>
             <p className="page__info">
-              HOMA-IR = {"("}Инсулин{" "}
-              <span className="colored">[{values["glucose"]}]</span> x Глюкоза
-              натощак <span className="colored">[{values["insulin"]}]</span> /
-              22,5
+              <span className="colored">{`${result} балл${getWordEnding(
+                result
+              )}`}</span>
             </p>
             <div className="table">
               <div className="table__column table__column_left table__column_homa">
-                {homaData.numberVerdict.map((elem, index) => {
+                {vteoData.numberVerdict.map((elem, index) => {
                   return (
                     <p
                       key={index}
-                      className={`table__row ${
-                        index === getIndexHoma(result) && "colored"
+                      className={`table__row table__row_hypertens ${
+                        index === getIndexVteo(result) && "colored"
                       }`}
                     >
                       {elem}
@@ -106,12 +122,12 @@ function Homa() {
                 })}
               </div>
               <div className="table__column table__column_right">
-                {homaData.textVerdict.map((elem, index) => {
+                {vteoData.textVerdict.map((elem, index) => {
                   return (
                     <p
                       key={index}
-                      className={`table__row ${
-                        index === getIndexHoma(result) && "colored"
+                      className={`table__row table__row_hypertens ${
+                        index === getIndexVteo(result) && "colored"
                       }`}
                     >
                       {elem}
@@ -127,4 +143,4 @@ function Homa() {
   );
 }
 
-export default Homa;
+export default Vteo;

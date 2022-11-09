@@ -2,52 +2,12 @@ import React, { useState } from "react";
 import Title from "../../components/Title/Title.jsx";
 import Input from "../../components/Input/Input.jsx";
 import Button from "../../components/Button/Button.jsx";
-import RadioInput from "../../components/RadioInput/RadioInput.jsx";
 
 import useFormValidation from "../../hooks/useFormValidation";
 
 import { hypertensData, getIndexHypertens } from "../../utils/constants";
 
 import "./Hypertens.css";
-
-const test = [
-  {
-    value: "0",
-  },
-  {
-    value: "1",
-  },
-  {
-    value: "2",
-  },
-  {
-    value: "3",
-  },
-];
-
-const questions = [
-  "Быстрое или сильное сердцебиение",
-  "Чувство напряженности, нерввозности",
-  "Нарушение сна",
-  "Возбудимость",
-  "Приступы тревоги, паники",
-  "Трудности в концентрации внимания",
-  "Чувство усталости или недостатка энергии",
-  "Потеря интереса ко многим вещам",
-  "Чувство недовольства или депрессия",
-  "Плаксивость",
-  "Раздражительность",
-  "Чувство головокружения или обморок",
-  "Давление или напряжение в голове, теле",
-  "Чувство онемения и дрожь в различных частях тела",
-  "Головные боли",
-  "Мышечные и суставные боли",
-  "Слабость в руках или ногах",
-  "Затрудненное дыхание",
-  "Приливы",
-  "Ночная потливость",
-  "Потеря интереса к сексу",
-];
 
 function Hypertens() {
   const { handleChange, values, isFormValid, setValues } = useFormValidation();
@@ -69,17 +29,6 @@ function Hypertens() {
           }}
         >
           <div className="page__header">
-            {questions.map((item, index) => {
-              return (
-                <RadioInput
-                  num={index}
-                  key={index}
-                  question={item}
-                  variants={test}
-                  onChange={handleChange}
-                />
-              );
-            })}
             <Title>Определение степени и стадии артериальной гипертензии</Title>
             <Input
               label="САД, мм.рт.ст"
@@ -88,7 +37,6 @@ function Hypertens() {
               values={values}
               setValues={setValues}
             />
-
             <Input
               label="ДАД, мм.рт.ст"
               name="dad"
@@ -96,8 +44,8 @@ function Hypertens() {
               values={values}
               setValues={setValues}
             />
-            <p> САД - Систолическое артериальное давление</p>
-            <p> ДАД - Диастолическое артериальное давление</p>
+            <p>САД - Систолическое артериальное давление</p>
+            <p>ДАД - Диастолическое артериальное давление</p>
           </div>
           <div className="page__footer">
             <Button valid={isFormValid && !isZeroInInputs}>Расчитать</Button>
@@ -152,7 +100,7 @@ function Hypertens() {
                   return (
                     <p
                       key={index}
-                      className={`table__row ${
+                      className={`table__row table__row_hypertens ${
                         index === getIndexHypertens(sad, dad) && "colored"
                       }`}
                     >
@@ -166,7 +114,7 @@ function Hypertens() {
                   return (
                     <p
                       key={index}
-                      className={`table__row ${
+                      className={`table__row table__row_hypertens ${
                         index === getIndexHypertens(sad, dad) && "colored"
                       }`}
                     >
@@ -180,7 +128,7 @@ function Hypertens() {
                   return (
                     <p
                       key={index}
-                      className={`table__row ${
+                      className={`table__row table__row_hypertens ${
                         index === getIndexHypertens(sad, dad) && "colored"
                       }`}
                     >

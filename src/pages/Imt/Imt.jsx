@@ -78,7 +78,7 @@ function Imt() {
             <Button valid={isFormValid && !isZeroInInputs}>Расчитать</Button>
           </div>
         </form>
-      )}{" "}
+      )}
       {result && !showMoreInfo && (
         <div className="imt">
           <div className="imt__header">

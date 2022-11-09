@@ -40,19 +40,33 @@
   font-size: 22px;
 }
 
-.table_hypertens {
-  font-size: 18px
-}
-
 .table__row {
   margin: 10px 0;
   height: 70px;
 }
 
-.table__row_hypertens {
-  height: 50px;
-}
-
 .table__column_left {
   min-width: 120px;
+}
+
+.page__green-hint {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 21px;
+}
+
+.page__green-variant {
+  font-size: 18px;
+}
+
+.page__green-variant:last-of-type {
+  margin-bottom: 30px; 
+}
+
+.page__note {
+  font-size: 18px;
+}
+
+.title_isa {
+  margin-bottom: 20px;
 }
