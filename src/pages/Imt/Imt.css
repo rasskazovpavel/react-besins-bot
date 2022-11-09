@@ -117,3 +117,8 @@
 .table__column_left {
   min-width: 120px;
 }
+
+.imt__footer {
+  display: flex;
+  gap: 1px;
+}

@@ -9,19 +9,6 @@
   padding: 30px 30px 0;
 }
 
-.page__number-result {
-  text-align: center;
-  margin-top: 30px;
-  font-size: 37px;
-  font-weight: bold;
-}
-
-.page__text-result {
-  text-align: center;
-  margin: 30px 0 50px;
-  font-size: 30px;
-}
-
 .page__info {
   text-align: center;
   font-size: 25px;
@@ -33,14 +20,72 @@
   font-weight: bold;
 }
 
-.page__note {
-  font-size: 18px;
+.page__label {
+  font-weight: bold;
+  font-size: 19px;
 }
 
 .page__input-date {
+  margin-top: 10px;
   width: 100%;
+  border: none;
+  border: 1px solid gray;
+  padding: 13px;
+  border-radius: 8px;
+  outline: none;
+  font-size: 19px;
 }
 
 .page__info_calendar {
   text-align: left;
+}
+
+.date-bar {
+  position: relative;
+  border: 1px solid #4e5994;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.date-bar__progress {
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  top: 0;
+  left: 0;
+  border-radius: 3px;
+  background-color: #4e5994;
+  transition: all ease-in-out 1s;
+}
+
+.date-bar__text {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-size: 23px;
+  line-height: 1;
+  color: black;
+  background-color: transparent;
+}
+
+.page__date-txt {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.page__date-txt_caps {
+  text-transform: uppercase;
+}
+
+.page__date-txt:first-of-type {
+  margin-top: 40px;
+}
+
+.title_calendar {
+  margin-bottom: 40px;
 }

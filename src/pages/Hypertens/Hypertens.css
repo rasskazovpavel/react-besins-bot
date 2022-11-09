@@ -56,3 +56,8 @@
 .table__column_left {
   min-width: 120px;
 }
+
+.page__footer {
+  display: flex;
+  gap: 1px;
+}

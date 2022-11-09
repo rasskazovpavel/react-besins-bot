@@ -277,6 +277,13 @@ const formatDateForDatePicker = (date) => {
   }-${splittedDate[1].length === 1 ? "0" + splittedDate[1] : splittedDate[1]}`;
 };
 
+const getWeekWord = (numWeek) => {
+  if (numWeek === 1) return "неделя";
+  if (numWeek % 10 === 2 || numWeek % 10 === 3 || numWeek % 10 === 4)
+    return "недели";
+  return "недель";
+};
+
 export {
   imtData,
   getIndexImt,
@@ -299,4 +306,5 @@ export {
   addDays,
   formatDate,
   formatDateForDatePicker,
+  getWeekWord,
 };

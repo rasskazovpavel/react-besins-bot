@@ -52,3 +52,8 @@
 .table__column_homa {
   min-width: 80px;
 }
+
+.page__footer {
+  display: flex;
+  gap: 1px;
+}

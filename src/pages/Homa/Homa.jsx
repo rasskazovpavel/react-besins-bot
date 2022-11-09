@@ -10,7 +10,8 @@ import { homaData, getIndexHoma } from "../../utils/constants";
 import "./Homa.css";
 
 function Homa() {
-  const { handleChange, values, isFormValid, setValues } = useFormValidation();
+  const { handleChange, values, isFormValid, setValues, setIsFormValid } =
+    useFormValidation();
   const isZeroInInputs = Object.values(values).includes("0");
   const [result, setResult] = useState(null);
   const [showMoreInfo, setShowMoreInfo] = useState(false);
@@ -47,7 +48,17 @@ function Homa() {
             />
           </div>
           <div className="page__footer">
-            <Button valid={isFormValid && !isZeroInInputs}>Расчитать</Button>
+            <Button valid={isFormValid && !isZeroInInputs}>Рассчитать</Button>
+            <Button
+              valid={Object.values(values).length != 0}
+              handler={() => {
+                setValues({});
+                setIsFormValid(false);
+              }}
+              type="button"
+            >
+              Oчистить
+            </Button>
           </div>
         </form>
       )}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Title from "../../components/Title/Title.jsx";
 import Input from "../../components/Input/Input.jsx";
 import Button from "../../components/Button/Button.jsx";
@@ -9,19 +9,16 @@ import { imtData, getIndexImt } from "../../utils/constants";
 
 import "./Imt.css";
 
+let barWidth = null;
+
 function Imt() {
-  const { handleChange, values, isFormValid, setValues } = useFormValidation();
+  const { handleChange, values, isFormValid, setValues, setIsFormValid } =
+    useFormValidation();
   const isZeroInInputs = Object.values(values).includes("0");
   const [result, setResult] = useState(null);
   const [showMoreInfo, setShowMoreInfo] = useState(false);
-  const [offset, setOffset] = useState(0);
+  const [offsetBar, setOffsetBar] = useState(0);
   const refBar = useRef(null);
-
-  let barWidth = null;
-
-  useEffect(() => {
-    barWidth = refBar.current ? refBar.current.offsetWidth : 0;
-  }, [refBar.current]);
 
   return (
     <>
@@ -38,21 +35,21 @@ function Imt() {
             setTimeout(() => {
               barWidth = refBar.current ? refBar.current.offsetWidth : 0;
               if (floatRes > 45) {
-                setOffset(barWidth * 0.9);
+                setOffsetBar(barWidth * 0.9);
               } else if (floatRes < 18) {
-                setOffset((floatRes / 45) * barWidth * 0.05);
+                setOffsetBar((floatRes / 45) * barWidth * 0.05);
               } else if (floatRes <= 25) {
-                setOffset((floatRes / 45) * barWidth * 0.3);
+                setOffsetBar((floatRes / 45) * barWidth * 0.3);
               } else if (floatRes <= 30) {
-                setOffset((floatRes / 45) * barWidth * 0.55);
+                setOffsetBar((floatRes / 45) * barWidth * 0.55);
               } else if (floatRes <= 33) {
-                setOffset((floatRes / 45) * barWidth * 0.62);
+                setOffsetBar((floatRes / 45) * barWidth * 0.62);
               } else if (floatRes <= 35) {
-                setOffset((floatRes / 45) * barWidth * 0.7);
+                setOffsetBar((floatRes / 45) * barWidth * 0.7);
               } else if (floatRes <= 40) {
-                setOffset((floatRes / 45) * barWidth * 0.85);
+                setOffsetBar((floatRes / 45) * barWidth * 0.85);
               } else {
-                setOffset((floatRes / 45) * barWidth * 0.9);
+                setOffsetBar((floatRes / 45) * barWidth * 0.9);
               }
             }, 200);
           }}
@@ -75,7 +72,17 @@ function Imt() {
             />
           </div>
           <div className="imt__footer">
-            <Button valid={isFormValid && !isZeroInInputs}>Расчитать</Button>
+            <Button valid={isFormValid && !isZeroInInputs}>Рассчитать</Button>
+            <Button
+              valid={Object.values(values).length != 0}
+              handler={() => {
+                setValues({});
+                setIsFormValid(false);
+              }}
+              type="button"
+            >
+              Очистить
+            </Button>
           </div>
         </form>
       )}
@@ -98,7 +105,7 @@ function Imt() {
             <div className="bars" ref={refBar}>
               <p
                 className="bars__result"
-                style={{ transform: `translateX(${offset}px)` }}
+                style={{ transform: `translateX(${offsetBar}px)` }}
               >
                 {result}
               </p>
