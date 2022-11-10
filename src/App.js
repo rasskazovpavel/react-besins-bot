@@ -1,29 +1,86 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Homa from "./pages/Homa/Homa.jsx";
-import Green from "./pages/Green/Green.jsx";
-import Isa from "./pages/Isa/Isa.jsx";
-import Imt from "./pages/Imt/Imt.jsx";
-import Hypertens from "./pages/Hypertens/Hypertens.jsx";
-import Vteo from "./pages/Vteo/Vteo";
-import Calendar from "./pages/Calendar/Calendar";
-import Home from "./pages/Home/Home";
-
 import "./App.css";
+
+const Homa = React.lazy(() => import("./pages/Homa/Homa.jsx"));
+const Green = React.lazy(() => import("./pages/Green/Green.jsx"));
+const Isa = React.lazy(() => import("./pages/Isa/Isa.jsx"));
+const Imt = React.lazy(() => import("./pages/Imt/Imt.jsx"));
+const Hypertens = React.lazy(() => import("./pages/Hypertens/Hypertens.jsx"));
+const Vteo = React.lazy(() => import("./pages/Vteo/Vteo.jsx"));
+const Calendar = React.lazy(() => import("./pages/Calendar/Calendar.jsx"));
+const Home = React.lazy(() => import("./pages/Home/Home.jsx"));
 
 function App() {
   return (
     <div className="app">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/imt" element={<Imt />} />
-          <Route path="/homa" element={<Homa />} />
-          <Route path="/hypertens" element={<Hypertens />} />
-          <Route path="/green" element={<Green />} />
-          <Route path="/isa" element={<Isa />} />
-          <Route path="/vteo" element={<Vteo />} />
-          <Route path="/calendar" element={<Calendar />} />
+          <Route
+            index
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Home />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="imt"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Imt />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="homa"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Homa />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="hypertens"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Hypertens />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="green"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Green />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="isa"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Isa />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="vteo"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Vteo />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="calendar"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Calendar />
+              </React.Suspense>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
