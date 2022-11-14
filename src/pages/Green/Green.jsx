@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Title from "../../components/Title/Title.jsx";
-import Input from "../../components/Input/Input.jsx";
 import Button from "../../components/Button/Button.jsx";
 import RadioInput from "../../components/RadioInput/RadioInput.jsx";
 
@@ -17,7 +16,7 @@ import {
 import "./Green.css";
 
 function Green() {
-  const { handleChange, values, isFormValid, setValues } = useFormValidation();
+  const { handleChange, values, isFormValid } = useFormValidation();
   const [result, setResult] = useState(null);
   const [showMoreInfo, setShowMoreInfo] = useState(false);
 

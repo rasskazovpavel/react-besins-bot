@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 import "./Input.css";
 
 import arrow from "../../images/arrow.png";
@@ -21,7 +19,7 @@ function Input({ label, name, onChange, values, setValues }) {
       <div
         className="arrow arrow_up"
         onClick={() => {
-          if (values[name] != undefined) {
+          if (values[name] !== undefined) {
             setValues({ ...values, [name]: String(Number(values[name]) + 1) });
           }
         }}
@@ -31,7 +29,7 @@ function Input({ label, name, onChange, values, setValues }) {
       <div
         className="arrow arrow_down"
         onClick={() => {
-          if (values[name] != undefined && values[name] != 0) {
+          if (values[name] !== undefined && values[name] !== 0) {
             setValues({ ...values, [name]: String(Number(values[name]) - 1) });
           }
         }}

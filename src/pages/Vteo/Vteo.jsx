@@ -15,7 +15,7 @@ import {
 import "./Vteo.css";
 
 function Vteo() {
-  const { handleChange, values, isFormValid, setValues } = useFormValidation();
+  const { handleChange, values, isFormValid } = useFormValidation();
   const isZeroInInputs = Object.values(values).includes("0");
   const [result, setResult] = useState(null);
   const [showMoreInfo, setShowMoreInfo] = useState(false);

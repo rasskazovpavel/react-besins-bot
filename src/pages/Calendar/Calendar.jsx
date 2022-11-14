@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Title from "../../components/Title/Title.jsx";
 import Button from "../../components/Button/Button.jsx";
 import RadioInput from "../../components/RadioInput/RadioInput.jsx";
@@ -21,8 +21,7 @@ let barWidth = null;
 const currDate = new Date();
 
 function Calendar() {
-  const { handleChange, values, isFormValid, setValues, setIsFormValid } =
-    useFormValidation();
+  const { handleChange, values, isFormValid } = useFormValidation();
   const isZeroInInputs = Object.values(values).includes("0");
   const [result, setResult] = useState({});
   const [showMoreInfo, setShowMoreInfo] = useState(false);
@@ -32,7 +31,7 @@ function Calendar() {
 
   return (
     <>
-      {Object.values(result) == 0 && (
+      {Object.values(result) === 0 && (
         <form
           className="page"
           noValidate
@@ -91,7 +90,7 @@ function Calendar() {
           </div>
         </form>
       )}
-      {Object.values(result) != 0 && !showMoreInfo && (
+      {Object.values(result) !== 0 && !showMoreInfo && (
         <div className="page">
           <div className="page__header">
             <Title mod="title_center title_calendar">

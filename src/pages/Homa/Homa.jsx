@@ -50,7 +50,7 @@ function Homa() {
           <div className="page__footer">
             <Button valid={isFormValid && !isZeroInInputs}>Рассчитать</Button>
             <Button
-              valid={Object.values(values).length != 0}
+              valid={Object.values(values).length !== 0}
               handler={() => {
                 setValues({});
                 setIsFormValid(false);
