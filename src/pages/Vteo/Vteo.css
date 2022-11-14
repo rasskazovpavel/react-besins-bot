@@ -6,7 +6,7 @@
 }
 
 .page__header {
-  padding: 30px 30px 0;
+  padding: 30px 20px 0;
 }
 
 .page__number-result {
@@ -19,7 +19,7 @@
 .page__text-result {
   text-align: center;
   margin: 30px 0 50px;
-  font-size: 30px;
+  font-size: 26px;
 }
 
 .page__info {
