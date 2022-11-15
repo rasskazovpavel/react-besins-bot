@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Title from "../../components/Title/Title.jsx";
 import Button from "../../components/Button/Button.jsx";
 import RadioInput from "../../components/RadioInput/RadioInput.jsx";
@@ -18,17 +18,20 @@ import "./Calendar.css";
 let addedDate = null;
 let progress = null;
 let barWidth = null;
-const currDate = new Date();
 
 function Calendar() {
+  const currDate = new Date();
+  console.log("DATE", currDate);
   const { handleChange, values, isFormValid } = useFormValidation();
   const isZeroInInputs = Object.values(values).includes("0");
   const [result, setResult] = useState({});
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [showResult, setShowResult] = useState(false);
-  const [dateValue, setDateValue] = useState(formatDateForDatePicker(currDate));
+  const [dateValue, setDateValue] = useState(null);
   const [widthBar, setWidthBar] = useState(1);
   const refBar = useRef(null);
+
+  useEffect(() => setDateValue(formatDateForDatePicker(currDate)), []);
 
   return (
     <>
@@ -84,7 +87,7 @@ function Calendar() {
               type="date"
               name="date"
               onChange={(e) => setDateValue(e.target.value)}
-              value={dateValue}
+              value={dateValue || ""}
             />
           </div>
           <div className="calendar__footer">
@@ -132,7 +135,7 @@ function Calendar() {
         </div>
       )}
       {showMoreInfo && (
-        <div className="page">
+        <div className="calendar">
           <div className="calendar__header">
             <Title mod="title_center">Интерпретация</Title>
             <p className="calendar__info calendar__info_calendar">
