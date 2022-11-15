@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Title from "../../components/Title/Title.jsx";
 import Button from "../../components/Button/Button.jsx";
 import RadioInput from "../../components/RadioInput/RadioInput.jsx";
@@ -9,8 +9,8 @@ import {
   calendarVariants,
   formatDate,
   addDays,
-  formatDateForDatePicker,
   getWeekWord,
+  formatDateForDatePicker,
 } from "../../utils/constants";
 
 import "./Calendar.css";
@@ -21,17 +21,14 @@ let barWidth = null;
 
 function Calendar() {
   const currDate = new Date();
-  console.log("DATE", currDate);
   const { handleChange, values, isFormValid } = useFormValidation();
   const isZeroInInputs = Object.values(values).includes("0");
   const [result, setResult] = useState({});
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [showResult, setShowResult] = useState(false);
-  const [dateValue, setDateValue] = useState(null);
+  const [dateValue, setDateValue] = useState(formatDateForDatePicker(currDate));
   const [widthBar, setWidthBar] = useState(1);
   const refBar = useRef(null);
-
-  useEffect(() => setDateValue(formatDateForDatePicker(currDate)), []);
 
   return (
     <>

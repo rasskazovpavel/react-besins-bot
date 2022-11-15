@@ -272,9 +272,13 @@ const formatDate = (date) => {
 
 const formatDateForDatePicker = (date) => {
   const splittedDate = date.toLocaleDateString().split("/");
-  return `${splittedDate[2]}-${
-    splittedDate[0].length === 1 ? "0" + splittedDate[0] : splittedDate[0]
-  }-${splittedDate[1].length === 1 ? "0" + splittedDate[1] : splittedDate[1]}`;
+  console.log(splittedDate);
+  console.log(splittedDate[0]);
+  console.log(splittedDate[1]);
+  console.log(splittedDate[2]);
+  // return `${splittedDate[2]}-${
+  //   splittedDate[0].length <= 1 ? "0" + splittedDate[0] : splittedDate[0]
+  // }-${splittedDate[1].length <= 1 ? "0" + splittedDate[1] : splittedDate[1]}`;
 };
 
 const getWeekWord = (numWeek) => {
