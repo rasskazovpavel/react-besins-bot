@@ -35,7 +35,7 @@ function Imt() {
             setTimeout(() => {
               barWidth = refBar.current ? refBar.current.offsetWidth : 0;
               if (floatRes > 45) {
-                setOffsetBar(barWidth * 0.9);
+                setOffsetBar(barWidth * 0.75);
               } else if (floatRes < 18) {
                 setOffsetBar((floatRes / 45) * barWidth * 0.05);
               } else if (floatRes <= 25) {
@@ -49,7 +49,7 @@ function Imt() {
               } else if (floatRes <= 40) {
                 setOffsetBar((floatRes / 45) * barWidth * 0.85);
               } else {
-                setOffsetBar((floatRes / 45) * barWidth * 0.9);
+                setOffsetBar((floatRes / 45) * barWidth * 0.88);
               }
             }, 200);
           }}

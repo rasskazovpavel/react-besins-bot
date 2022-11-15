@@ -1,15 +1,15 @@
-.page {
+.calendar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
 }
 
-.page__header {
+.calendar__header {
   padding: 30px 20px 0;
 }
 
-.page__info {
+.calendar__info {
   text-align: center;
   font-size: 25px;
   margin: 30px 0;
@@ -20,12 +20,12 @@
   font-weight: bold;
 }
 
-.page__label {
+.calendar__label {
   font-weight: bold;
   font-size: 19px;
 }
 
-.page__input-date {
+.calendar__input-date {
   margin-top: 10px;
   width: 100%;
   border: none;
@@ -36,7 +36,7 @@
   font-size: 19px;
 }
 
-.page__info_calendar {
+.calendar__info_calendar {
   text-align: left;
 }
 
@@ -72,17 +72,17 @@
   background-color: transparent;
 }
 
-.page__date-txt {
+.calendar__date-txt {
   text-align: center;
   margin-bottom: 10px;
   font-size: 20px;
 }
 
-.page__date-txt_caps {
+.calendar__date-txt_caps {
   text-transform: uppercase;
 }
 
-.page__date-txt:first-of-type {
+.calendar__date-txt:first-of-type {
   margin-top: 40px;
 }
 

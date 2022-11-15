@@ -24,7 +24,7 @@ function Vteo() {
     <>
       {!result && (
         <form
-          className="page"
+          className="vteo"
           noValidate
           onSubmit={(e) => {
             e.preventDefault();
@@ -39,12 +39,12 @@ function Vteo() {
             setResult(sum);
           }}
         >
-          <div className="page__header">
+          <div className="vteo__header">
             <Title mod="title_vteo">
               Шкала оценки риска ВТЭО (Венозных тромбоэмболических осложнений) у
               нехирургических больных (шкала Падуа)
             </Title>
-            <p className="page__green-hint">
+            <p className="vteo__hint">
               Выберите, из перечисленного ниже то, что релевантно для пациента
             </p>
             {vteoQuestions.map((item) => {
@@ -59,20 +59,20 @@ function Vteo() {
               );
             })}
           </div>
-          <div className="page__footer">
+          <div className="vteo__footer">
             <Button valid={isFormValid && !isZeroInInputs}>Расчитать</Button>
           </div>
         </form>
       )}{" "}
       {result && !showMoreInfo && (
-        <div className="page">
-          <div className="page__header">
+        <div className="vteo">
+          <div className="vteo__header">
             <Title mod="title_center">Результат</Title>
             <h2
               style={{
                 color: `${vteoData.color[getIndexVteo(result)]}`,
               }}
-              className="page__number-result"
+              className="vteo__number-result"
             >
               {`${result} балл${getWordEnding(result)}`}
             </h2>
@@ -80,12 +80,12 @@ function Vteo() {
               style={{
                 color: `${vteoData.color[getIndexVteo(result)]}`,
               }}
-              className="page__text-result"
+              className="vteo__text-result"
             >
               {vteoData.textVerdict[getIndexVteo(result)]}
             </p>
           </div>
-          <div className="page__footer">
+          <div className="vteo__footer">
             <Button
               mod="button_transparent"
               handler={() => {
@@ -98,10 +98,10 @@ function Vteo() {
         </div>
       )}
       {showMoreInfo && (
-        <div className="page">
-          <div className="page__header">
+        <div className="vteo">
+          <div className="vteo__header">
             <Title mod="title_center">Интерпретация</Title>
-            <p className="page__info">
+            <p className="vteo__info">
               <span className="colored">{`${result} балл${getWordEnding(
                 result
               )}`}</span>

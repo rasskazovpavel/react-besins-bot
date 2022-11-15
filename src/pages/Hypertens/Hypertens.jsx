@@ -21,7 +21,7 @@ function Hypertens() {
     <>
       {!sad && !dad && (
         <form
-          className="page"
+          className="hypertens"
           noValidate
           onSubmit={(e) => {
             e.preventDefault();
@@ -29,7 +29,7 @@ function Hypertens() {
             setDad(Number(values["dad"]));
           }}
         >
-          <div className="page__header">
+          <div className="hypertens__header">
             <Title>Определение степени и стадии артериальной гипертензии</Title>
             <Input
               label="САД, мм.рт.ст"
@@ -48,7 +48,7 @@ function Hypertens() {
             <p>САД - Систолическое артериальное давление</p>
             <p>ДАД - Диастолическое артериальное давление</p>
           </div>
-          <div className="page__footer">
+          <div className="hypertens__footer">
             <Button valid={isFormValid && !isZeroInInputs}>Рассчитать</Button>
             <Button
               valid={Object.values(values).length !== 0}
@@ -64,14 +64,14 @@ function Hypertens() {
         </form>
       )}{" "}
       {sad && dad && !showMoreInfo && (
-        <div className="page">
-          <div className="page__header">
+        <div className="hypertens">
+          <div className="hypertens__header">
             <Title mod="title_center">Результат</Title>
             <h2
               style={{
                 color: `${hypertensData.color[getIndexHypertens(sad, dad)]}`,
               }}
-              className="page__number-result"
+              className="hypertens__number-result"
             >
               {`САД ${sad} / ДАД ${dad}`}
             </h2>
@@ -79,12 +79,12 @@ function Hypertens() {
               style={{
                 color: `${hypertensData.color[getIndexHypertens(sad, dad)]}`,
               }}
-              className="page__text-result"
+              className="hypertens__text-result"
             >
               {hypertensData.textVerdict[getIndexHypertens(sad, dad)]}
             </p>
           </div>
-          <div className="page__footer">
+          <div className="hypertens__footer">
             <Button
               mod="button_transparent"
               handler={() => {
@@ -97,10 +97,10 @@ function Hypertens() {
         </div>
       )}
       {showMoreInfo && (
-        <div className="page">
-          <div className="page__header">
+        <div className="hypertens">
+          <div className="hypertens__header">
             <Title mod="title_center">Интерпретация</Title>
-            <p className="page__info">
+            <p className="hypertens__info">
               САД
               <span className="colored"> [{values["sad"]}]</span> / ДАД
               <span className="colored"> [{values["dad"]}]</span>

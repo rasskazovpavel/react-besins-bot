@@ -20,7 +20,7 @@ function Homa() {
     <>
       {!result && (
         <form
-          className="page"
+          className="homa"
           noValidate
           onSubmit={(e) => {
             e.preventDefault();
@@ -30,7 +30,7 @@ function Homa() {
             setResult(floatRes.toFixed(1));
           }}
         >
-          <div className="page__header">
+          <div className="homa__header">
             <Title>Расчёт индекса инсулинорезистентности (HOMA-IR)</Title>
             <Input
               label="Глюкоза натощак, ммоль/л"
@@ -47,7 +47,7 @@ function Homa() {
               setValues={setValues}
             />
           </div>
-          <div className="page__footer">
+          <div className="homa__footer">
             <Button valid={isFormValid && !isZeroInInputs}>Рассчитать</Button>
             <Button
               valid={Object.values(values).length !== 0}
@@ -63,23 +63,23 @@ function Homa() {
         </form>
       )}
       {result && !showMoreInfo && (
-        <div className="page">
-          <div className="page__header">
+        <div className="homa">
+          <div className="homa__header">
             <Title mod="title_center">Результат</Title>
             <h2
               style={{ color: `${homaData.color[getIndexHoma(result)]}` }}
-              className="page__number-result"
+              className="homa__number-result"
             >
               HOMA-IR = {result}
             </h2>
             <p
               style={{ color: `${homaData.color[getIndexHoma(result)]}` }}
-              className="page__text-result"
+              className="homa__text-result"
             >
               {homaData.textVerdict[getIndexHoma(result)]}
             </p>
           </div>
-          <div className="page__footer">
+          <div className="homa__footer">
             <Button
               mod="button_transparent"
               handler={() => {
@@ -92,10 +92,10 @@ function Homa() {
         </div>
       )}
       {showMoreInfo && (
-        <div className="page">
-          <div className="page__header">
+        <div className="homa">
+          <div className="homa__header">
             <Title mod="title_center">Интерпретация</Title>
-            <p className="page__info">
+            <p className="homa__info">
               HOMA-IR = {"("}Инсулин{" "}
               <span className="colored">[{values["glucose"]}]</span> x Глюкоза
               натощак <span className="colored">[{values["insulin"]}]</span> /

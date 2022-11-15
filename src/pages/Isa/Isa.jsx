@@ -20,7 +20,7 @@ function Isa() {
     <>
       {!result && (
         <form
-          className="page"
+          className="isa"
           noValidate
           onSubmit={(e) => {
             e.preventDefault();
@@ -30,11 +30,11 @@ function Isa() {
             setResult(floatRes.toFixed(2));
           }}
         >
-          <div className="page__header">
+          <div className="isa__header">
             <Title mod="title_isa">
               Калькулятор рассчета индекса свободных андрогенов (ИСА)
             </Title>
-            <p className="page__green-hint">
+            <p className="isa__hint">
               Индекс свободных андрогенов (ИСА) - это показатель соотношения
               общего тестостерона к белку, связывающему половые стероиды (ГСПГ).
             </p>
@@ -59,14 +59,14 @@ function Isa() {
               id="gender"
             />
           </div>
-          <div className="page__footer">
+          <div className="isa__footer">
             <Button valid={isFormValid && !isZeroInInputs}>Расчитать</Button>
           </div>
         </form>
       )}
       {result != null && !showMoreInfo && (
-        <div className="page">
-          <div className="page__header">
+        <div className="isa">
+          <div className="isa__header">
             <Title mod="title_center">Результат</Title>
             <h2
               style={{
@@ -76,7 +76,7 @@ function Isa() {
                   ]
                 }`,
               }}
-              className="page__number-result"
+              className="isa__number-result"
             >
               {`${result}%`}
             </h2>
@@ -88,7 +88,7 @@ function Isa() {
                   ]
                 }`,
               }}
-              className="page__text-result"
+              className="isa__text-result"
             >
               {
                 isaData[values["gender"]].textVerdict[
@@ -96,14 +96,14 @@ function Isa() {
                 ]
               }
             </p>
-            <p className="page__note">
+            <p className="isa__note">
               Если результаты теста на общий тестостерон не согласуются с
               клиническими наблюдениями, например, с пониженной сексуальной
               активностью у мужчин и гирсутизмом у женщин, то у женщин тест на
               ИСА является достоверным методом диагностики гиперандрогении.
             </p>
           </div>
-          <div className="page__footer">
+          <div className="isa__footer">
             <Button
               mod="button_transparent"
               handler={() => {
@@ -116,10 +116,10 @@ function Isa() {
         </div>
       )}
       {showMoreInfo && (
-        <div className="page">
-          <div className="page__header">
+        <div className="isa">
+          <div className="isa__header">
             <Title mod="title_center">Интерпретация</Title>
-            <p className="page__info">
+            <p className="isa__info">
               ИСА = Общий тестостерон (нмоль/л){" "}
               <span className="colored">[{values["testosterone"]}]</span> / ГСПГ
               (нмоль/л) <span className="colored">[{values["gspg"]}]</span> x

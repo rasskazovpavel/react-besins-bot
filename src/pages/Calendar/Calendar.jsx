@@ -25,18 +25,20 @@ function Calendar() {
   const isZeroInInputs = Object.values(values).includes("0");
   const [result, setResult] = useState({});
   const [showMoreInfo, setShowMoreInfo] = useState(false);
+  const [showResult, setShowResult] = useState(false);
   const [dateValue, setDateValue] = useState(formatDateForDatePicker(currDate));
   const [widthBar, setWidthBar] = useState(1);
   const refBar = useRef(null);
 
   return (
     <>
-      {Object.values(result) === 0 && (
+      {!showResult && (
         <form
-          className="page"
+          className="calendar"
           noValidate
           onSubmit={(e) => {
             e.preventDefault();
+            setShowResult(true);
             values["type-date"] === "По менструации"
               ? (addedDate = 280)
               : (addedDate = 266);
@@ -68,7 +70,7 @@ function Calendar() {
             }, 200);
           }}
         >
-          <div className="page__header">
+          <div className="calendar__header">
             <Title>Расчёт срока беременности и даты родов</Title>
             <RadioInput
               question="Тип даты"
@@ -76,23 +78,23 @@ function Calendar() {
               onChange={handleChange}
               id="type-date"
             />
-            <label className="page__label">Дата</label>
+            <label className="calendar__label">Дата</label>
             <input
-              className="page__input-date"
+              className="calendar__input-date"
               type="date"
               name="date"
               onChange={(e) => setDateValue(e.target.value)}
               value={dateValue}
             />
           </div>
-          <div className="page__footer">
+          <div className="calendar__footer">
             <Button valid={isFormValid && !isZeroInInputs}>Рассчитать</Button>
           </div>
         </form>
       )}
-      {Object.values(result) !== 0 && !showMoreInfo && (
-        <div className="page">
-          <div className="page__header">
+      {showResult && !showMoreInfo && (
+        <div className="calendar">
+          <div className="calendar__header">
             <Title mod="title_center title_calendar">
               Рассчитать срок беременности и дату родов
             </Title>
@@ -103,21 +105,21 @@ function Calendar() {
               </p>
               <div style={{ width: widthBar }} className="date-bar__progress" />
             </div>
-            <p className="page__date-txt">
+            <p className="calendar__date-txt">
               Предполагаемая дата родов:{" "}
               <span className="colored">{result.birthday}</span>
             </p>
-            <p className="page__date-txt">
+            <p className="calendar__date-txt">
               Срок беременности:{" "}
               <span className="colored">
                 {result.week} {getWeekWord(result.week)}
               </span>
             </p>
-            <p className="page__date-txt page__date-txt_caps colored">
+            <p className="calendar__date-txt calendar__date-txt_caps colored">
               {result.week}-я неделя беременности
             </p>
           </div>
-          <div className="page__footer">
+          <div className="calendar__footer">
             <Button
               mod="button_transparent"
               handler={() => {
@@ -131,16 +133,16 @@ function Calendar() {
       )}
       {showMoreInfo && (
         <div className="page">
-          <div className="page__header">
+          <div className="calendar__header">
             <Title mod="title_center">Интерпретация</Title>
-            <p className="page__info page__info_calendar">
+            <p className="calendar__info calendar__info_calendar">
               <span className="colored">ПДР</span> = Первый день последней
               менструации + 280 дней
             </p>
-            <p className="page__info page__info_calendar">
+            <p className="calendar__info calendar__info_calendar">
               <span className="colored">ПДР</span> = Дата зачатия + 266 дней
             </p>
-            <p className="page__info page__info_calendar">
+            <p className="calendar__info calendar__info_calendar">
               <span className="colored">Срок беременности</span> = разница в
               днях между первым днем последней менструации и текущей датой
             </p>
