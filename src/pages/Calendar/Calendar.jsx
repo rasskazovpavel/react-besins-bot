@@ -18,9 +18,9 @@ import "./Calendar.css";
 let addedDate = null;
 let progress = null;
 let barWidth = null;
+const currDate = new Date();
 
 function Calendar() {
-  const currDate = new Date();
   const { handleChange, values, isFormValid } = useFormValidation();
   const isZeroInInputs = Object.values(values).includes("0");
   const [result, setResult] = useState({});
@@ -43,6 +43,7 @@ function Calendar() {
               ? (addedDate = 280)
               : (addedDate = 266);
             const conceptionDate = new Date(dateValue);
+            console.log("conceptionDate", conceptionDate);
             let differenceDays = Math.ceil(
               Math.abs(
                 (conceptionDate.getTime() - currDate.getTime()) /
@@ -58,6 +59,8 @@ function Calendar() {
                 ? 1
                 : Math.ceil(differenceDays / 7);
             const birthday = addDays(dateValue, addedDate);
+            console.log("123", birthday.toLocaleDateString());
+
             setResult({
               week: currWeek,
               birthday: formatDate(birthday),
@@ -107,7 +110,7 @@ function Calendar() {
             </div>
             <p className="calendar__date-txt">
               Предполагаемая дата родов:{" "}
-              <span className="colored">{result.birthday}</span>
+              <span className="colored">{result.birthday} г.</span>
             </p>
             <p className="calendar__date-txt">
               Срок беременности:{" "}

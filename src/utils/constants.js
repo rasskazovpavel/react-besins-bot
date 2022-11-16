@@ -261,24 +261,29 @@ const monthsName = [
 const addDays = (date, days) => {
   const result = new Date(date);
   result.setDate(result.getDate() + days);
+  console.log("addDays", result);
   return result;
 };
 
+const getDivider = (dateString) => {
+  if (dateString.includes(".")) return ".";
+  if (dateString.includes("/")) return "/";
+  if (dateString.includes("-")) return "-";
+};
+
 const formatDate = (date) => {
-  return `${date.toLocaleDateString().split("/")[1]} ${
+  const divider = getDivider(date.toLocaleDateString());
+  return `${date.toLocaleDateString().split(divider)[0]} ${
     monthsName[date.getMonth()]
-  } ${date.toLocaleDateString().split("/")[2]}`;
+  } ${date.toLocaleDateString().split(divider)[2]}`;
 };
 
 const formatDateForDatePicker = (date) => {
-  const splittedDate = date.toLocaleDateString().split("/");
-  console.log(splittedDate);
-  console.log(splittedDate[0]);
-  console.log(splittedDate[1]);
-  console.log(splittedDate[2]);
-  // return `${splittedDate[2]}-${
-  //   splittedDate[0].length <= 1 ? "0" + splittedDate[0] : splittedDate[0]
-  // }-${splittedDate[1].length <= 1 ? "0" + splittedDate[1] : splittedDate[1]}`;
+  const divider = getDivider(date.toLocaleDateString());
+  const splittedDate = date.toLocaleDateString().split(divider);
+  return `${splittedDate[2]}-${
+    splittedDate[0].length <= 1 ? "0" + splittedDate[0] : splittedDate[0]
+  }-${splittedDate[1].length <= 1 ? "0" + splittedDate[1] : splittedDate[1]}`;
 };
 
 const getWeekWord = (numWeek) => {
