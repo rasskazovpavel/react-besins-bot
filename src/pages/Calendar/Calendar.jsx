@@ -21,20 +21,29 @@ let barWidth = null;
 const currDate = new Date();
 
 function Calendar() {
+  const [isDateChanged, setIsDateChanged] = useState(false);
   const { handleChange, values, isFormValid, setIsFormValid } =
-    useFormValidation();
+    useFormValidation(isDateChanged);
   const isZeroInInputs = Object.values(values).includes("0");
   const [result, setResult] = useState({});
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [dateValue, setDateValue] = useState(formatDateForDatePicker(currDate));
   const [widthBar, setWidthBar] = useState(1);
+
   const refBar = useRef(null);
+  // useEffect(() => {
+  //   if (!dateValue) setIsFormValid(false);
+  //   // if (dateValue && values["type-date"] && isDateChanged) setIsFormValid(true);
+  // }, [dateValue, values, setIsFormValid, isDateChanged]);
 
   useEffect(() => {
-    if (!dateValue) setIsFormValid(false);
-    if (dateValue && values["type-date"]) setIsFormValid(true);
-  }, [dateValue, values, setIsFormValid]);
+    if (!isDateChanged) {
+      setIsFormValid(false);
+    } else {
+      setIsFormValid(true);
+    }
+  }, [isDateChanged, setIsFormValid]);
 
   return (
     <>
@@ -92,7 +101,11 @@ function Calendar() {
               className="calendar__input-date"
               type="date"
               name="date"
-              onChange={(e) => setDateValue(e.target.value)}
+              onChange={(e) => {
+                setDateValue(e.target.value);
+                setIsDateChanged(true);
+                console.log("123");
+              }}
               value={dateValue || ""}
             />
           </div>
