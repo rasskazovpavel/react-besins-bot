@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Title from "../../components/Title/Title.jsx";
 import Button from "../../components/Button/Button.jsx";
 import RadioInput from "../../components/RadioInput/RadioInput.jsx";
@@ -21,7 +21,8 @@ let barWidth = null;
 const currDate = new Date();
 
 function Calendar() {
-  const { handleChange, values, isFormValid } = useFormValidation();
+  const { handleChange, values, isFormValid, setIsFormValid } =
+    useFormValidation();
   const isZeroInInputs = Object.values(values).includes("0");
   const [result, setResult] = useState({});
   const [showMoreInfo, setShowMoreInfo] = useState(false);
@@ -29,6 +30,11 @@ function Calendar() {
   const [dateValue, setDateValue] = useState(formatDateForDatePicker(currDate));
   const [widthBar, setWidthBar] = useState(1);
   const refBar = useRef(null);
+
+  useEffect(() => {
+    if (!dateValue) setIsFormValid(false);
+    if (dateValue && values["type-date"]) setIsFormValid(true);
+  }, [dateValue, values, setIsFormValid]);
 
   return (
     <>

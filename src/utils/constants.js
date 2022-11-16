@@ -282,8 +282,14 @@ const formatDateForDatePicker = (date) => {
   const divider = getDivider(date.toLocaleDateString());
   const splittedDate = date.toLocaleDateString().split(divider);
   return `${splittedDate[2]}-${
-    splittedDate[0].length <= 1 ? "0" + splittedDate[0] : splittedDate[0]
-  }-${splittedDate[1].length <= 1 ? "0" + splittedDate[1] : splittedDate[1]}`;
+    splittedDate[0].length === 1 ? "0" + splittedDate[0] : splittedDate[0]
+  }-${splittedDate[1].length === 1 ? "0" + splittedDate[1] : splittedDate[1]}`;
+};
+
+const formatDateForCalc = (date) => {
+  const divider = getDivider(date);
+  const splittedDate = date.split(divider).reverse().join("/");
+  return splittedDate;
 };
 
 const getWeekWord = (numWeek) => {
@@ -316,4 +322,5 @@ export {
   formatDate,
   formatDateForDatePicker,
   getWeekWord,
+  formatDateForCalc,
 };
