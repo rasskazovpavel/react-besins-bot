@@ -15,8 +15,10 @@ import {
 
 import "./Calendar.css";
 
-let addedDate = null;
+let addedDays = null;
 let progress = null;
+let currWeek = null;
+let birthday = null;
 let barWidth = null;
 const currDate = new Date();
 
@@ -24,26 +26,18 @@ function Calendar() {
   const [isDateChanged, setIsDateChanged] = useState(false);
   const { handleChange, values, isFormValid, setIsFormValid } =
     useFormValidation(isDateChanged);
-  const isZeroInInputs = Object.values(values).includes("0");
   const [result, setResult] = useState({});
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [dateValue, setDateValue] = useState(formatDateForDatePicker(currDate));
   const [widthBar, setWidthBar] = useState(1);
-
   const refBar = useRef(null);
-  // useEffect(() => {
-  //   if (!dateValue) setIsFormValid(false);
-  //   // if (dateValue && values["type-date"] && isDateChanged) setIsFormValid(true);
-  // }, [dateValue, values, setIsFormValid, isDateChanged]);
 
   useEffect(() => {
-    if (!isDateChanged) {
-      setIsFormValid(false);
-    } else {
-      setIsFormValid(true);
-    }
+    !isDateChanged ? setIsFormValid(false) : setIsFormValid(true);
   }, [isDateChanged, setIsFormValid]);
+
+  useEffect(() => console.log(result), [result]);
 
   return (
     <>
@@ -53,34 +47,55 @@ function Calendar() {
           noValidate
           onSubmit={(e) => {
             e.preventDefault();
-            setShowResult(true);
-            values["type-date"] === "По менструации"
-              ? (addedDate = 280)
-              : (addedDate = 266);
             const conceptionDate = new Date(dateValue);
-            console.log("conceptionDate", conceptionDate);
+            // Вычисляем др
+            values["type-date"] === "По менструации"
+              ? (addedDays = 280)
+              : (addedDays = 266);
+            birthday = addDays(conceptionDate, addedDays);
+
             let differenceDays = Math.ceil(
-              Math.abs(
-                (conceptionDate.getTime() - currDate.getTime()) /
-                  (1000 * 3600 * 24)
-              )
+              (conceptionDate.getTime() - currDate.getTime()) /
+                (1000 * 3600 * 24)
             );
-            if (values["type-date"] === "По дате зачатия") {
-              differenceDays += 14;
+            if (differenceDays < 0) {
+              console.log("Выбрана прошедшая дата");
+              if (values["type-date"] === "По дате зачатия") {
+                differenceDays -= 14;
+              }
+              // Ребенок уже родился
+              if (differenceDays < -280) {
+                progress = null;
+                currWeek = null;
+                differenceDays = null;
+              } else {
+                progress = Math.abs(differenceDays / 280);
+                currWeek = Math.abs(
+                  Math.ceil(differenceDays / 7) === 0
+                    ? 1
+                    : Math.ceil(differenceDays / 7)
+                );
+                differenceDays = Math.abs(differenceDays);
+              }
+            } else if (differenceDays === 0) {
+              console.log("Выбрана сегодняшняя дата");
+              progress = 0;
+              currWeek = 1;
+              differenceDays = 1;
+            } else {
+              console.log("Выбрана будущая дата");
+              progress = null;
+              currWeek = null;
+              differenceDays = 0;
             }
-            progress = differenceDays / 280;
-            const currWeek =
-              Math.ceil(differenceDays / 7) === 0
-                ? 1
-                : Math.ceil(differenceDays / 7);
-            const birthday = addDays(dateValue, addedDate);
-            console.log("123", birthday.toLocaleDateString());
 
             setResult({
-              week: currWeek,
+              ...result,
               birthday: formatDate(birthday),
+              week: currWeek,
               days: differenceDays,
             });
+            setShowResult(true);
 
             setTimeout(() => {
               barWidth = refBar.current ? refBar.current.offsetWidth : 0;
@@ -103,14 +118,15 @@ function Calendar() {
               name="date"
               onChange={(e) => {
                 setDateValue(e.target.value);
-                setIsDateChanged(true);
-                console.log("123");
+                setIsDateChanged(values["type-date"] && true);
               }}
               value={dateValue || ""}
             />
           </div>
           <div className="calendar__footer">
-            <Button valid={isFormValid && !isZeroInInputs}>Рассчитать</Button>
+            <Button valid={isFormValid && values["type-date"]}>
+              Рассчитать
+            </Button>
           </div>
         </form>
       )}
@@ -122,8 +138,7 @@ function Calendar() {
             </Title>
             <div className="date-bar" ref={refBar}>
               <p className="date-bar__text">
-                {progress * 100 < 1 ? 1 : Math.floor(progress * 100)}% (
-                {result.days} из 280 дней)
+                {Math.floor(progress * 100)}% ({result.days} из 280 дней)
               </p>
               <div style={{ width: widthBar }} className="date-bar__progress" />
             </div>
@@ -131,15 +146,19 @@ function Calendar() {
               Предполагаемая дата родов:{" "}
               <span className="colored">{result.birthday} г.</span>
             </p>
-            <p className="calendar__date-txt">
-              Срок беременности:{" "}
-              <span className="colored">
-                {result.week} {getWeekWord(result.week)}
-              </span>
-            </p>
-            <p className="calendar__date-txt calendar__date-txt_caps colored">
-              {result.week}-я неделя беременности
-            </p>
+            {!!result.days && (
+              <p className="calendar__date-txt">
+                Срок беременности:{" "}
+                <span className="colored">
+                  {result.week} {getWeekWord(result.week)}
+                </span>
+              </p>
+            )}
+            {!!result.days && (
+              <p className="calendar__date-txt calendar__date-txt_caps colored">
+                {result.week}-я неделя беременности
+              </p>
+            )}
           </div>
           <div className="calendar__footer">
             <Button

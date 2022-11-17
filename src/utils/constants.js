@@ -261,7 +261,6 @@ const monthsName = [
 const addDays = (date, days) => {
   const result = new Date(date);
   result.setDate(result.getDate() + days);
-  console.log("addDays", result);
   return result;
 };
 
@@ -273,7 +272,7 @@ const getDivider = (dateString) => {
 
 const formatDate = (date) => {
   const divider = getDivider(date.toLocaleDateString());
-  return `${date.toLocaleDateString().split(divider)[0]} ${
+  return `${date.toLocaleDateString().split(divider)[1]} ${
     monthsName[date.getMonth()]
   } ${date.toLocaleDateString().split(divider)[2]}`;
 };
