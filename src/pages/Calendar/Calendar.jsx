@@ -29,6 +29,7 @@ function Calendar() {
   const [result, setResult] = useState({});
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [showResult, setShowResult] = useState(false);
+  const [showWeekResult, setShowWeekResult] = useState(false);
   const [dateValue, setDateValue] = useState(formatDateForDatePicker(currDate));
   const [widthBar, setWidthBar] = useState(1);
   const refBar = useRef(null);
@@ -52,7 +53,7 @@ function Calendar() {
             values["type-date"] === "По менструации"
               ? (addedDays = 280)
               : (addedDays = 266);
-            birthday = addDays(conceptionDate, addedDays);
+            birthday = addDays(dateValue, addedDays);
 
             let differenceDays = Math.ceil(
               (conceptionDate.getTime() - currDate.getTime()) /
@@ -65,24 +66,28 @@ function Calendar() {
               }
               // Ребенок уже родился
               if (differenceDays < -280) {
-                progress = null;
+                setShowWeekResult(false);
+                progress = 1;
                 currWeek = null;
-                differenceDays = null;
+                differenceDays = 280;
               } else {
+                setShowWeekResult(true);
                 progress = Math.abs(differenceDays / 280);
-                currWeek = Math.abs(
-                  Math.ceil(differenceDays / 7) === 0
+                console.log(Math.ceil(differenceDays / 7));
+                currWeek =
+                  Math.ceil(Math.abs(differenceDays / 7)) === 0
                     ? 1
-                    : Math.ceil(differenceDays / 7)
-                );
+                    : Math.ceil(Math.abs(differenceDays / 7));
                 differenceDays = Math.abs(differenceDays);
               }
             } else if (differenceDays === 0) {
+              setShowWeekResult(true);
               console.log("Выбрана сегодняшняя дата");
               progress = 0;
               currWeek = 1;
               differenceDays = 1;
             } else {
+              setShowWeekResult(false);
               console.log("Выбрана будущая дата");
               progress = null;
               currWeek = null;
@@ -143,10 +148,10 @@ function Calendar() {
               <div style={{ width: widthBar }} className="date-bar__progress" />
             </div>
             <p className="calendar__date-txt">
-              Предполагаемая дата родов:{" "}
+              Предполагаемая дата родов:{<br></br>}
               <span className="colored">{result.birthday} г.</span>
             </p>
-            {!!result.days && (
+            {showWeekResult && (
               <p className="calendar__date-txt">
                 Срок беременности:{" "}
                 <span className="colored">
@@ -154,7 +159,7 @@ function Calendar() {
                 </span>
               </p>
             )}
-            {!!result.days && (
+            {showWeekResult && (
               <p className="calendar__date-txt calendar__date-txt_caps colored">
                 {result.week}-я неделя беременности
               </p>
