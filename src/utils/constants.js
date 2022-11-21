@@ -151,6 +151,7 @@ const getIndexGreen = (value) => {
 };
 
 const getWordEnding = (amount) => {
+  if (amount > 10 && amount < 20) return "ов";
   if (amount % 10 === 0) return "ов";
   if (amount % 10 === 1) return "";
   if (amount % 10 >= 2 && amount % 10 <= 4) return "a";

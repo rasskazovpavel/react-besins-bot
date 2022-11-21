@@ -51,7 +51,7 @@ function Green() {
             {greenQuestions.map((item, index) => {
               return (
                 <RadioInput
-                  num={index}
+                  num={index + 1}
                   key={index}
                   question={item}
                   variants={greenVariants}
