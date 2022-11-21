@@ -39,7 +39,7 @@ input::-webkit-inner-spin-button {
 }
 
 .arrow_up {
-  top: calc(50% - 4px);
+  top: calc(50% - 6px);
   border-top-left-radius: 30%;
   border-top-right-radius: 30%;
 }

@@ -69,7 +69,7 @@ function OvulationCalendar() {
               name="date"
               onChange={(e) => {
                 setDateValue(e.target.value);
-                setIsDateChanged(values["days"] && true);
+                setIsDateChanged(true);
               }}
               value={dateValue || ""}
             />
