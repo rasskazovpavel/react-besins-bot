@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Title from "../../components/Title/Title.jsx";
 import Input from "../../components/Input/Input.jsx";
 import Button from "../../components/Button/Button.jsx";
@@ -10,11 +10,27 @@ import { isaVariants, getIndexIsa, isaData } from "../../utils/constants";
 
 import "./Isa.css";
 
+const NUMBER_INPUT_COUNT = 3;
+
 function Isa() {
-  const { handleChange, values, isFormValid, setValues } = useFormValidation();
+  const { handleChange, values, isFormValid, setValues, setIsFormValid } =
+    useFormValidation();
   const isZeroInInputs = Object.values(values).includes("0");
   const [result, setResult] = useState(null);
   const [showMoreInfo, setShowMoreInfo] = useState(false);
+
+  useEffect(() => {
+    if (
+      Object.keys(values).length === NUMBER_INPUT_COUNT &&
+      !Object.values(values)
+        .map((value) => Number(value))
+        .includes(0)
+    ) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [values, setIsFormValid]);
 
   return (
     <>

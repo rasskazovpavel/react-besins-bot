@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
 
-export function useFormValidation(injectValid = true) {
+export function useFormValidationRadio() {
   const [values, setValues] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => console.log("Values", values), [values]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-    setIsFormValid(e.target.closest("form").checkValidity() && injectValid);
+    const { name } = e.target;
+    setValues({
+      ...values,
+      [name]: values[name] && values[name] === "on" ? "off" : "on",
+    });
+
+    setIsFormValid(e.target.closest("form").checkValidity());
   };
 
   return {
@@ -21,4 +25,4 @@ export function useFormValidation(injectValid = true) {
   };
 }
 
-export default useFormValidation;
+export default useFormValidationRadio;

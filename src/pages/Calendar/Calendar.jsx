@@ -38,8 +38,6 @@ function Calendar() {
     !isDateChanged ? setIsFormValid(false) : setIsFormValid(true);
   }, [isDateChanged, setIsFormValid]);
 
-  useEffect(() => console.log(result), [result]);
-
   return (
     <>
       {!showResult && (

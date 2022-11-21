@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Title from "../../components/Title/Title.jsx";
 import Button from "../../components/Button/Button.jsx";
 import Checkbox from "../../components/Checkbox/Checkbox.jsx";
 
-import useFormValidation from "../../hooks/useFormValidation";
+import useFormValidationRadio from "../../hooks/useFormValidationRadio";
 
 import {
   vteoQuestions,
@@ -14,11 +14,26 @@ import {
 
 import "./Vteo.css";
 
+function removeObjOffKeys(object) {
+  for (let key in object) {
+    if (object[key] === "off") {
+      delete object[key];
+    }
+  }
+  return object;
+}
+
 function Vteo() {
-  const { handleChange, values, isFormValid } = useFormValidation();
-  const isZeroInInputs = Object.values(values).includes("0");
+  const { handleChange, values, isFormValid, setIsFormValid } =
+    useFormValidationRadio();
   const [result, setResult] = useState(null);
   const [showMoreInfo, setShowMoreInfo] = useState(false);
+
+  useEffect(() => {
+    Object.values(values).includes("on")
+      ? setIsFormValid(true)
+      : setIsFormValid(false);
+  }, [values, setIsFormValid]);
 
   return (
     <>
@@ -28,7 +43,8 @@ function Vteo() {
           noValidate
           onSubmit={(e) => {
             e.preventDefault();
-            const tempArrayKeys = Object.keys(values);
+            const onObjkey = removeObjOffKeys(values);
+            const tempArrayKeys = Object.keys(onObjkey);
             const arrWithPoints = tempArrayKeys.map((key) =>
               Number(key.split("-")[1])
             );
@@ -60,7 +76,7 @@ function Vteo() {
             })}
           </div>
           <div className="vteo__footer">
-            <Button valid={isFormValid && !isZeroInInputs}>Расчитать</Button>
+            <Button valid={isFormValid}>Расчитать</Button>
           </div>
         </form>
       )}{" "}

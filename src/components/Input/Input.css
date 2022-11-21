@@ -25,7 +25,7 @@ input::-webkit-inner-spin-button {
 }
 .arrow {
   border: 1px solid grey;
-  padding: 2px;
+  padding: 5px;
   position: absolute;
   top: 50%;
   right: 20px;
@@ -39,19 +39,19 @@ input::-webkit-inner-spin-button {
 }
 
 .arrow_up {
-  top: calc(50% + 3px);
+  top: calc(50% - 4px);
   border-top-left-radius: 30%;
   border-top-right-radius: 30%;
 }
 
 .arrow_down {
-  top: calc(50% + 11px);
+  top: calc(50% + 13px);
   border-bottom-left-radius: 30%;
   border-bottom-right-radius: 30%;
 }
 
 .arrow__image {
-  width: 6px;
+  width: 10px;
   user-select: none;
 }
 

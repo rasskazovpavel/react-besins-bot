@@ -15,11 +15,12 @@ import "./OvulationCalendar.css";
 
 let ovulDay = null;
 const currDate = new Date();
+const NUMBER_INPUT_COUNT = 1;
 
 function OvulationCalendar() {
   const [isDateChanged, setIsDateChanged] = useState(false);
   const { handleChange, values, isFormValid, setIsFormValid, setValues } =
-    useFormValidation(isDateChanged);
+    useFormValidation();
   const [result, setResult] = useState(null);
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [showResult, setShowResult] = useState(false);
@@ -28,6 +29,20 @@ function OvulationCalendar() {
   useEffect(() => {
     !isDateChanged ? setIsFormValid(false) : setIsFormValid(true);
   }, [isDateChanged, setIsFormValid]);
+
+  useEffect(() => {
+    if (
+      Object.keys(values).length === NUMBER_INPUT_COUNT &&
+      !Object.values(values)
+        .map((value) => Number(value))
+        .includes(0) &&
+      isDateChanged
+    ) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [values, isDateChanged, setIsFormValid]);
 
   return (
     <>
@@ -39,7 +54,6 @@ function OvulationCalendar() {
             e.preventDefault();
             ovulDay = addDays(dateValue, Number(values["days"]) - 14);
             setResult(formatDate(ovulDay));
-
             setShowResult(true);
           }}
         >

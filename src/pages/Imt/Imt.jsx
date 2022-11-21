@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Title from "../../components/Title/Title.jsx";
 import Input from "../../components/Input/Input.jsx";
 import Button from "../../components/Button/Button.jsx";
@@ -10,6 +10,7 @@ import { imtData, getIndexImt } from "../../utils/constants";
 import "./Imt.css";
 
 let barWidth = null;
+const NUMBER_INPUT_COUNT = 2;
 
 function Imt() {
   const { handleChange, values, isFormValid, setValues, setIsFormValid } =
@@ -19,6 +20,19 @@ function Imt() {
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [offsetBar, setOffsetBar] = useState(0);
   const refBar = useRef(null);
+
+  useEffect(() => {
+    if (
+      Object.keys(values).length === NUMBER_INPUT_COUNT &&
+      !Object.values(values)
+        .map((value) => Number(value))
+        .includes(0)
+    ) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [values, setIsFormValid]);
 
   return (
     <>

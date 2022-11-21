@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Title from "../../components/Title/Title.jsx";
 import Input from "../../components/Input/Input.jsx";
 import Button from "../../components/Button/Button.jsx";
@@ -9,6 +9,8 @@ import { hypertensData, getIndexHypertens } from "../../utils/constants";
 
 import "./Hypertens.css";
 
+const NUMBER_INPUT_COUNT = 2;
+
 function Hypertens() {
   const { handleChange, values, isFormValid, setValues, setIsFormValid } =
     useFormValidation();
@@ -16,6 +18,19 @@ function Hypertens() {
   const [sad, setSad] = useState(null);
   const [dad, setDad] = useState(null);
   const [showMoreInfo, setShowMoreInfo] = useState(false);
+
+  useEffect(() => {
+    if (
+      Object.keys(values).length === NUMBER_INPUT_COUNT &&
+      !Object.values(values)
+        .map((value) => Number(value))
+        .includes(0)
+    ) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [values, setIsFormValid]);
 
   return (
     <>
