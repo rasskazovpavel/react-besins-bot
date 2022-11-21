@@ -74,7 +74,7 @@ function OvulationCalendar() {
               value={dateValue || ""}
             />
             <Input
-              label="Продолжительсть цикла"
+              label="Продолжительность цикла"
               name="days"
               onChange={handleChange}
               values={values}
