@@ -106,7 +106,7 @@ function Hypertens() {
               <span className="colored"> [{values["dad"]}]</span>
             </p>
             <div className="table table_hypertens">
-              <div className="table__column table__column_left table__column_homa">
+              <div className="table__column table__column_left">
                 {hypertensData.sad.map((elem, index) => {
                   return (
                     <p
@@ -120,7 +120,7 @@ function Hypertens() {
                   );
                 })}
               </div>
-              <div className="table__column table__column_middle">
+              <div className="table__column table__column_middle table__column_hyper">
                 {hypertensData.dad.map((elem, index) => {
                   return (
                     <p

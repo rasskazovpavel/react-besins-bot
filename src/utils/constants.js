@@ -262,9 +262,9 @@ const addDays = (date, days) => {
   console.log("date", date);
   console.log("days", days);
   const result = new Date(date);
-  console.log("result", result.getDate());
+  console.log("result >>>", result.getDate());
   result.setDate(result.getDate() + days);
-  console.log(result);
+  console.log("final", result);
   return result;
 };
 
@@ -276,6 +276,7 @@ const getDivider = (dateString) => {
 
 const formatDate = (date) => {
   const divider = getDivider(date.toLocaleDateString());
+  console.log(date, divider);
   console.log(date.toLocaleDateString().split(divider)[0]);
   console.log(date.toLocaleDateString().split(divider)[1]);
   console.log(date.toLocaleDateString().split(divider)[2]);

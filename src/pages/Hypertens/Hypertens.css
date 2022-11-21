@@ -61,3 +61,7 @@
   display: flex;
   gap: 1px;
 }
+
+.table__column_hyper {
+  min-width: 80px;
+}

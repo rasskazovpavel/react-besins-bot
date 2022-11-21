@@ -2,9 +2,9 @@ import "./Input.css";
 
 import arrow from "../../images/arrow.png";
 
-function Input({ label, name, onChange, values, setValues }) {
+function Input({ label, name, onChange, values, setValues, mod }) {
   return (
-    <div className="input app__input">
+    <div className={`input app__input ${mod && mod}`}>
       <label className="input__label">{label}</label>
       <input
         className="input__field"
@@ -19,7 +19,9 @@ function Input({ label, name, onChange, values, setValues }) {
       <div
         className="arrow arrow_up"
         onClick={() => {
-          if (values[name] !== undefined) {
+          if (values[name] === undefined) {
+            setValues({ ...values, [name]: "1" });
+          } else {
             setValues({ ...values, [name]: String(Number(values[name]) + 1) });
           }
         }}
@@ -29,9 +31,10 @@ function Input({ label, name, onChange, values, setValues }) {
       <div
         className="arrow arrow_down"
         onClick={() => {
-          if (values[name] !== undefined && values[name] !== 0) {
-            setValues({ ...values, [name]: String(Number(values[name]) - 1) });
-          }
+          setValues({
+            ...values,
+            [name]: values[name] > 0 ? String(Number(values[name]) - 1) : "0",
+          });
         }}
       >
         <img

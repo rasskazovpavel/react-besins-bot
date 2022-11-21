@@ -13,6 +13,7 @@ function Home() {
       <Link to="/isa">ISA</Link>
       <Link to="/vteo">VTEO</Link>
       <Link to="/calendar">Calendar</Link>
+      <Link to="/ovulation">Ovulation Calendar</Link>
     </div>
   );
 }

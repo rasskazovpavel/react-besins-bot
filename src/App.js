@@ -11,6 +11,9 @@ const Hypertens = React.lazy(() => import("./pages/Hypertens/Hypertens.jsx"));
 const Vteo = React.lazy(() => import("./pages/Vteo/Vteo.jsx"));
 const Calendar = React.lazy(() => import("./pages/Calendar/Calendar.jsx"));
 const Home = React.lazy(() => import("./pages/Home/Home.jsx"));
+const OvulationCalendar = React.lazy(() =>
+  import("./pages/OvulationCalendar/OvulationCalendar.jsx")
+);
 
 function App() {
   return (
@@ -22,6 +25,14 @@ function App() {
             element={
               <React.Suspense fallback={<>...</>}>
                 <Home />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="ovulation"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <OvulationCalendar />
               </React.Suspense>
             }
           />
