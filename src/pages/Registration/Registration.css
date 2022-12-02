@@ -1,0 +1,124 @@
+.imt {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.imt__header {
+  padding: 30px 30px 0;
+}
+
+.imt__number-result {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 37px;
+  font-weight: bold;
+}
+
+.imt__text-result {
+  text-align: center;
+  margin: 30px 0 50px;
+  font-size: 26px;
+}
+
+.bars {
+  height: 30px;
+  display: flex;
+  position: relative;
+}
+
+.bar {
+  position: relative;
+}
+
+.bar_0 {
+  background-color: #ffa3a3;
+  flex: 2;
+}
+
+.bar_1 {
+  flex: 5;
+  background-color: #a1f1e3;
+}
+
+.bar_2,
+.bar_3,
+.bar_4,
+.bar_5 {
+  flex: 5;
+}
+
+.bar_2 {
+  background-color: #ffa3a3;
+}
+
+.bar_3 {
+  background-color: #dd6e6f;
+}
+
+.bar_4 {
+  background-color: #ce575a;
+}
+
+.bar_5 {
+  background-color: #c23b3c;
+}
+
+.bar__scale {
+  position: absolute;
+  bottom: -7px;
+  right: -1px;
+  width: 1px;
+  height: 10px;
+  background-color: black;
+}
+
+.bar__number {
+  position: absolute;
+  bottom: -30px;
+  right: -10px;
+}
+
+.bars__result {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  z-index: 1;
+  transition: all 1s ease;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.imt__info {
+  text-align: center;
+  font-size: 25px;
+  margin: 30px 0;
+}
+
+.colored {
+  color: #4e5994;
+  font-weight: bold;
+}
+
+.table {
+  display: flex;
+  gap: 2%;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.table__row {
+  margin: 10px 0;
+  min-width: 120px;
+  height: 70px;
+}
+
+.table__column_left {
+  min-width: 120px;
+}
+
+.imt__footer {
+  display: flex;
+  gap: 1px;
+}

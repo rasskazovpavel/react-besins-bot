@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
+import { useTelegram } from "./hooks/useTelegram";
 
 const Homa = React.lazy(() => import("./pages/Homa/Homa.jsx"));
 const Green = React.lazy(() => import("./pages/Green/Green.jsx"));
@@ -14,8 +15,14 @@ const Home = React.lazy(() => import("./pages/Home/Home.jsx"));
 const OvulationCalendar = React.lazy(() =>
   import("./pages/OvulationCalendar/OvulationCalendar.jsx")
 );
+const Registration = React.lazy(() =>
+  import("./pages/Registration/Registration.jsx")
+);
 
 function App() {
+  const { tg } = useTelegram();
+
+  useEffect(() => tg.ready(), [tg]);
   return (
     <div className="app">
       <HashRouter>
@@ -89,6 +96,14 @@ function App() {
             element={
               <React.Suspense fallback={<>...</>}>
                 <Calendar />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="registration"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Registration />
               </React.Suspense>
             }
           />

@@ -14,6 +14,7 @@ function Home() {
       <Link to="/vteo">VTEO</Link>
       <Link to="/calendar">Calendar</Link>
       <Link to="/ovulation">Ovulation Calendar</Link>
+      <Link to="/registration">Registration</Link>
     </div>
   );
 }
