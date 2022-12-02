@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import Title from "../../components/Title/Title.jsx";
 import Input from "../../components/Input/Input.jsx";
 import Button from "../../components/Button/Button.jsx";
@@ -14,14 +14,26 @@ let barWidth = null;
 const NUMBER_INPUT_COUNT = 4;
 
 function Registration() {
-  const { handleChange, values, isFormValid, setValues, setIsFormValid } =
+  const { handleChange, values, setValues, setIsFormValid } =
     useFormValidation();
-  const isZeroInInputs = Object.values(values).includes("0");
+  // const isZeroInInputs = Object.values(values).includes("0");
   const [result, setResult] = useState(null);
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [offsetBar, setOffsetBar] = useState(0);
   const refBar = useRef(null);
-  const { tg, onClose, onToggleButton } = useTelegram();
+  const { tg } = useTelegram();
+
+  const onSendData = useCallback(() => {
+    const data = values;
+    tg.sendData(JSON.stringify(data));
+  }, [values, tg]);
+
+  useEffect(() => {
+    tg.onEvent("mainButtonClicked", onSendData);
+    return () => {
+      tg.offEvent("mainButtonClicked", onSendData);
+    };
+  }, [onSendData, tg]);
 
   useEffect(() => {
     tg.MainButton.setParams({
@@ -46,8 +58,6 @@ function Registration() {
 
   return (
     <>
-      <button onClick={onClose}>Закрыть</button>
-      <button onClick={onToggleButton}>Закрыть</button>
       {!result && (
         <form
           className="imt"
@@ -115,7 +125,7 @@ function Registration() {
               type="phone"
             />
           </div>
-          <div className="imt__footer">
+          {/* <div className="imt__footer">
             <Button valid={isFormValid && !isZeroInInputs}>
               Зарегистрироваться
             </Button>
@@ -129,7 +139,7 @@ function Registration() {
             >
               Очистить
             </Button>
-          </div>
+          </div> */}
         </form>
       )}
       {result && !showMoreInfo && (
