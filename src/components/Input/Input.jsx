@@ -10,6 +10,7 @@ function Input({
   setValues,
   mod,
   type = "number",
+  placeholder,
 }) {
   return (
     <div className={`input app__input ${mod && mod}`}>
@@ -19,7 +20,7 @@ function Input({
         value={values[name] || ""}
         onChange={onChange}
         min="0"
-        placeholder={type === "number" && "0"}
+        placeholder={placeholder ? placeholder : type === "number" ? "0" : ""}
         name={name}
         required
         type={type}

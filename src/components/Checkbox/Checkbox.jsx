@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Checkbox.css";
 
-function Checkbox({ text, id, onChange, value }) {
+function Checkbox({ text, id, onChange, value, name }) {
   return (
     <label className="checkbox" htmlFor={`checkbox${id}`}>
       {text}
@@ -10,7 +10,7 @@ function Checkbox({ text, id, onChange, value }) {
         className="checkbox__input"
         type="checkbox"
         id={`checkbox${id}`}
-        name={value}
+        name={name ? name : value}
         onChange={onChange}
       />
       <span className="checkbox__mark"></span>

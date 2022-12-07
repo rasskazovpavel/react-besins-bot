@@ -89,6 +89,7 @@ function Registration() {
             values={values}
             setValues={setValues}
             type="tel"
+            placeholder={"Формат: 89997776655"}
           />
           <Input
             label="Почта"
