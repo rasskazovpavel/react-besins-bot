@@ -8,7 +8,7 @@ import useFormValidation from "../../hooks/useFormValidation";
 import "./Registration.css";
 import { useTelegram } from "../../hooks/useTelegram.js";
 
-const NUMBER_INPUT_COUNT = 5;
+const NUMBER_INPUT_COUNT = 6;
 
 function Registration() {
   const { handleChange, values, setValues, setIsFormValid } =
