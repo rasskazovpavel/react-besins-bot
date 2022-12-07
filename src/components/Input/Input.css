@@ -5,6 +5,10 @@ input::-webkit-inner-spin-button {
 
 .input {
   position: relative;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
 }
 
 .input__field {
@@ -21,7 +25,7 @@ input::-webkit-inner-spin-button {
 .input__label {
   font-weight: bold;
   font-size: 19px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .arrow {
   border: 1px solid grey;
