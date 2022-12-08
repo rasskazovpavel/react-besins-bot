@@ -13,7 +13,7 @@ input::-webkit-inner-spin-button {
 
 .input__field {
   width: 100%;
-  padding: 13px;
+  padding: 13px 15% 13px 13px;
   outline: none;
   border: none;
   border: 1px solid #484242;
@@ -43,7 +43,7 @@ input::-webkit-inner-spin-button {
 }
 
 .arrow_up {
-  top: calc(50% - 6px);
+  top: calc(50% - 9px);
   border-top-left-radius: 30%;
   border-top-right-radius: 30%;
 }
