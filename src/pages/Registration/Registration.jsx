@@ -39,7 +39,7 @@ export default function Registration() {
   useEffect(() => {
     const checkValidity = () => {
       return (
-        Object.values(values).includes('') &&
+        !Object.values(values).includes('') &&
         Object.keys(values).length === NUMBER_INPUT_COUNT &&
         check &&
         isEmail(values['mail']) &&
