@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from "react";
-import Title from "../../components/Title/Title.jsx";
-import Input from "../../components/Input/Input.jsx";
-import Button from "../../components/Button/Button.jsx";
+import React, { useState, useEffect } from 'react';
+import { Title, Button, Input } from '../../components';
 
-import useFormValidation from "../../hooks/useFormValidation";
+import useFormValidation from '../../hooks/useFormValidation';
 
-import { homaData, getIndexHoma } from "../../utils/constants";
+import { homaData, getIndexHoma } from '../../utils/constants';
 
-import "./Homa.css";
+import './Homa.css';
 
 const NUMBER_INPUT_COUNT = 2;
 
 function Homa() {
   const { handleChange, values, isFormValid, setValues, setIsFormValid } =
     useFormValidation();
-  const isZeroInInputs = Object.values(values).includes("0");
+  const isZeroInInputs = Object.values(values).includes('0');
   const [result, setResult] = useState(null);
   const [showMoreInfo, setShowMoreInfo] = useState(false);
 
@@ -39,8 +37,8 @@ function Homa() {
           noValidate
           onSubmit={(e) => {
             e.preventDefault();
-            const glucose = Number(values["glucose"]);
-            const insulin = Number(values["insulin"]);
+            const glucose = Number(values['glucose']);
+            const insulin = Number(values['insulin']);
             const floatRes = (glucose * insulin) / 22.5;
             setResult(floatRes.toFixed(1));
           }}
@@ -111,9 +109,9 @@ function Homa() {
           <div className="homa__header">
             <Title mod="title_center">Интерпретация</Title>
             <p className="homa__info">
-              HOMA-IR = {"("}Инсулин{" "}
-              <span className="colored">[{values["glucose"]}]</span> x Глюкоза
-              натощак <span className="colored">[{values["insulin"]}]</span> /
+              HOMA-IR = {'('}Инсулин{' '}
+              <span className="colored">[{values['glucose']}]</span> x Глюкоза
+              натощак <span className="colored">[{values['insulin']}]</span> /
               22,5
             </p>
             <div className="table">
@@ -123,7 +121,7 @@ function Homa() {
                     <p
                       key={index}
                       className={`table__row ${
-                        index === getIndexHoma(result) && "colored"
+                        index === getIndexHoma(result) && 'colored'
                       }`}
                     >
                       {elem}
@@ -137,7 +135,7 @@ function Homa() {
                     <p
                       key={index}
                       className={`table__row ${
-                        index === getIndexHoma(result) && "colored"
+                        index === getIndexHoma(result) && 'colored'
                       }`}
                     >
                       {elem}

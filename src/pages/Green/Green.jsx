@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import Title from "../../components/Title/Title.jsx";
-import Button from "../../components/Button/Button.jsx";
-import RadioInput from "../../components/RadioInput/RadioInput.jsx";
+import React, { useState } from 'react';
+import { Title, Button, RadioInput } from '../../components';
 
-import useFormValidation from "../../hooks/useFormValidation";
+import useFormValidation from '../../hooks/useFormValidation';
 
 import {
   greenQuestions,
@@ -11,9 +9,9 @@ import {
   greenData,
   getIndexGreen,
   getWordEnding,
-} from "../../utils/constants";
+} from '../../utils/constants';
 
-import "./Green.css";
+import './Green.css';
 
 function Green() {
   const { handleChange, values, isFormValid } = useFormValidation();
@@ -117,7 +115,7 @@ function Green() {
                     <p
                       key={index}
                       className={`table__row ${
-                        index === getIndexGreen(result) && "colored"
+                        index === getIndexGreen(result) && 'colored'
                       }`}
                     >
                       {elem}
@@ -132,7 +130,7 @@ function Green() {
                     <p
                       key={index}
                       className={`table__row ${
-                        index === getIndexGreen(result) && "colored"
+                        index === getIndexGreen(result) && 'colored'
                       }`}
                     >
                       {elem}

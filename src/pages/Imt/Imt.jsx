@@ -1,13 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
-import Title from "../../components/Title/Title.jsx";
-import Input from "../../components/Input/Input.jsx";
-import Button from "../../components/Button/Button.jsx";
+import React, { useState, useRef, useEffect } from 'react';
+import { Title, Input, Button } from '../../components';
 
-import useFormValidation from "../../hooks/useFormValidation";
+import useFormValidation from '../../hooks/useFormValidation';
 
-import { imtData, getIndexImt } from "../../utils/constants";
+import { imtData, getIndexImt } from '../../utils/constants';
 
-import "./Imt.css";
+import './Imt.css';
 
 let barWidth = null;
 const NUMBER_INPUT_COUNT = 2;
@@ -15,7 +13,7 @@ const NUMBER_INPUT_COUNT = 2;
 function Imt() {
   const { handleChange, values, isFormValid, setValues, setIsFormValid } =
     useFormValidation();
-  const isZeroInInputs = Object.values(values).includes("0");
+  const isZeroInInputs = Object.values(values).includes('0');
   const [result, setResult] = useState(null);
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [offsetBar, setOffsetBar] = useState(0);
@@ -42,8 +40,8 @@ function Imt() {
           noValidate
           onSubmit={(e) => {
             e.preventDefault();
-            const weight = Number(values["weight"]);
-            const height = Number(values["height"]);
+            const weight = Number(values['weight']);
+            const height = Number(values['height']);
             const floatRes = weight / (((height / 100) * height) / 100);
             setResult(floatRes.toFixed(2));
             setTimeout(() => {
@@ -164,9 +162,9 @@ function Imt() {
           <div className="imt__header">
             <Title mod="title_center">Интерпретация</Title>
             <p className="imt__info">
-              ИМТ = Вес {"("}
-              <span className="colored">[{values["weight"]}]</span> / (Рост{" "}
-              <span className="colored">[{values["height"]}]</span>)<sup>2</sup>
+              ИМТ = Вес {'('}
+              <span className="colored">[{values['weight']}]</span> / (Рост{' '}
+              <span className="colored">[{values['height']}]</span>)<sup>2</sup>
             </p>
             <div className="table">
               <div className="table__column table__column_left">
@@ -175,7 +173,7 @@ function Imt() {
                     <p
                       key={index}
                       className={`table__row ${
-                        index === getIndexImt(result) && "colored"
+                        index === getIndexImt(result) && 'colored'
                       }`}
                     >
                       {elem}
@@ -189,7 +187,7 @@ function Imt() {
                     <p
                       key={index}
                       className={`table__row ${
-                        index === getIndexImt(result) && "colored"
+                        index === getIndexImt(result) && 'colored'
                       }`}
                     >
                       {elem}

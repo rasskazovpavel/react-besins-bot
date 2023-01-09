@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from "react";
-import Title from "../../components/Title/Title.jsx";
-import Input from "../../components/Input/Input.jsx";
-import Button from "../../components/Button/Button.jsx";
+import React, { useState, useEffect } from 'react';
+import { Title, Button, Input } from '../../components';
 
-import useFormValidation from "../../hooks/useFormValidation";
+import useFormValidation from '../../hooks/useFormValidation';
 
-import { hypertensData, getIndexHypertens } from "../../utils/constants";
+import { hypertensData, getIndexHypertens } from '../../utils/constants';
 
-import "./Hypertens.css";
+import './Hypertens.css';
 
 const NUMBER_INPUT_COUNT = 2;
 
 function Hypertens() {
   const { handleChange, values, isFormValid, setValues, setIsFormValid } =
     useFormValidation();
-  const isZeroInInputs = Object.values(values).includes("0");
+  const isZeroInInputs = Object.values(values).includes('0');
   const [sad, setSad] = useState(null);
   const [dad, setDad] = useState(null);
   const [showMoreInfo, setShowMoreInfo] = useState(false);
@@ -40,8 +38,8 @@ function Hypertens() {
           noValidate
           onSubmit={(e) => {
             e.preventDefault();
-            setSad(Number(values["sad"]));
-            setDad(Number(values["dad"]));
+            setSad(Number(values['sad']));
+            setDad(Number(values['dad']));
           }}
         >
           <div className="hypertens__header">
@@ -77,7 +75,7 @@ function Hypertens() {
             </Button>
           </div>
         </form>
-      )}{" "}
+      )}{' '}
       {sad && dad && !showMoreInfo && (
         <div className="hypertens">
           <div className="hypertens__header">
@@ -117,8 +115,8 @@ function Hypertens() {
             <Title mod="title_center">Интерпретация</Title>
             <p className="hypertens__info">
               САД
-              <span className="colored"> [{values["sad"]}]</span> / ДАД
-              <span className="colored"> [{values["dad"]}]</span>
+              <span className="colored"> [{values['sad']}]</span> / ДАД
+              <span className="colored"> [{values['dad']}]</span>
             </p>
             <div className="table table_hypertens">
               <div className="table__column table__column_left">
@@ -127,7 +125,7 @@ function Hypertens() {
                     <p
                       key={index}
                       className={`table__row table__row_hypertens ${
-                        index === getIndexHypertens(sad, dad) && "colored"
+                        index === getIndexHypertens(sad, dad) && 'colored'
                       }`}
                     >
                       {elem}
@@ -141,7 +139,7 @@ function Hypertens() {
                     <p
                       key={index}
                       className={`table__row table__row_hypertens ${
-                        index === getIndexHypertens(sad, dad) && "colored"
+                        index === getIndexHypertens(sad, dad) && 'colored'
                       }`}
                     >
                       {elem}
@@ -155,7 +153,7 @@ function Hypertens() {
                     <p
                       key={index}
                       className={`table__row table__row_hypertens ${
-                        index === getIndexHypertens(sad, dad) && "colored"
+                        index === getIndexHypertens(sad, dad) && 'colored'
                       }`}
                     >
                       {elem}

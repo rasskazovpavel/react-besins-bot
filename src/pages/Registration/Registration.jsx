@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import isEmail from 'validator/es/lib/isEmail';
 import isMobilePhone from 'validator/es/lib/isMobilePhone';
-import Title from '../../components/Title/Title.jsx';
-import Input from '../../components/Input/Input.jsx';
-import Checkbox from '../../components/Checkbox/Checkbox.jsx';
+
+import { Title, Input, Checkbox } from '../../components';
 
 import useFormValidation from '../../hooks/useFormValidation';
 import { useTelegram } from '../../hooks/useTelegram.js';

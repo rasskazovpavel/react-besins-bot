@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from "react";
-import Title from "../../components/Title/Title.jsx";
-import Button from "../../components/Button/Button.jsx";
-import Checkbox from "../../components/Checkbox/Checkbox.jsx";
+import React, { useState, useEffect } from 'react';
+import { Title, Button, Checkbox } from '../../components';
 
-import useFormValidationRadio from "../../hooks/useFormValidationRadio";
+import useFormValidationRadio from '../../hooks/useFormValidationRadio';
 
 import {
   vteoQuestions,
   getWordEnding,
   getIndexVteo,
   vteoData,
-} from "../../utils/constants";
+} from '../../utils/constants';
 
-import "./Vteo.css";
+import './Vteo.css';
 
 function removeObjOffKeys(object) {
   for (let key in object) {
-    if (object[key] === "off") {
+    if (object[key] === 'off') {
       delete object[key];
     }
   }
@@ -30,7 +28,7 @@ function Vteo() {
   const [showMoreInfo, setShowMoreInfo] = useState(false);
 
   useEffect(() => {
-    Object.values(values).includes("on")
+    Object.values(values).includes('on')
       ? setIsFormValid(true)
       : setIsFormValid(false);
   }, [values, setIsFormValid]);
@@ -46,7 +44,7 @@ function Vteo() {
             const onObjkey = removeObjOffKeys(values);
             const tempArrayKeys = Object.keys(onObjkey);
             const arrWithPoints = tempArrayKeys.map((key) =>
-              Number(key.split("-")[1])
+              Number(key.split('-')[1])
             );
             const sum = arrWithPoints.reduce(
               (total, amount) => total + Number(amount),
@@ -79,7 +77,7 @@ function Vteo() {
             <Button valid={isFormValid}>Расчитать</Button>
           </div>
         </form>
-      )}{" "}
+      )}{' '}
       {result && !showMoreInfo && (
         <div className="vteo">
           <div className="vteo__header">
@@ -129,7 +127,7 @@ function Vteo() {
                     <p
                       key={index}
                       className={`table__row table__row_hypertens ${
-                        index === getIndexVteo(result) && "colored"
+                        index === getIndexVteo(result) && 'colored'
                       }`}
                     >
                       {elem}
@@ -143,7 +141,7 @@ function Vteo() {
                     <p
                       key={index}
                       className={`table__row table__row_hypertens ${
-                        index === getIndexVteo(result) && "colored"
+                        index === getIndexVteo(result) && 'colored'
                       }`}
                     >
                       {elem}

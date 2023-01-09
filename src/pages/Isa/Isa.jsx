@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from "react";
-import Title from "../../components/Title/Title.jsx";
-import Input from "../../components/Input/Input.jsx";
-import Button from "../../components/Button/Button.jsx";
-import RadioInput from "../../components/RadioInput/RadioInput.jsx";
+import React, { useState, useEffect } from 'react';
+import { Title, Button, Input, RadioInput } from '../../components';
 
-import useFormValidation from "../../hooks/useFormValidation";
+import useFormValidation from '../../hooks/useFormValidation';
 
-import { isaVariants, getIndexIsa, isaData } from "../../utils/constants";
+import { isaVariants, getIndexIsa, isaData } from '../../utils/constants';
 
-import "./Isa.css";
+import './Isa.css';
 
 const NUMBER_INPUT_COUNT = 3;
 
 function Isa() {
   const { handleChange, values, isFormValid, setValues, setIsFormValid } =
     useFormValidation();
-  const isZeroInInputs = Object.values(values).includes("0");
+  const isZeroInInputs = Object.values(values).includes('0');
   const [result, setResult] = useState(null);
   const [showMoreInfo, setShowMoreInfo] = useState(false);
 
@@ -40,8 +37,8 @@ function Isa() {
           noValidate
           onSubmit={(e) => {
             e.preventDefault();
-            const gspg = Number(values["gspg"]);
-            const testosterone = Number(values["testosterone"]);
+            const gspg = Number(values['gspg']);
+            const testosterone = Number(values['testosterone']);
             const floatRes = (testosterone / gspg) * 100;
             setResult(floatRes.toFixed(2));
           }}
@@ -87,8 +84,8 @@ function Isa() {
             <h2
               style={{
                 color: `${
-                  isaData[values["gender"]].color[
-                    getIndexIsa(values["gender"], result)
+                  isaData[values['gender']].color[
+                    getIndexIsa(values['gender'], result)
                   ]
                 }`,
               }}
@@ -99,16 +96,16 @@ function Isa() {
             <p
               style={{
                 color: `${
-                  isaData[values["gender"]].color[
-                    getIndexIsa(values["gender"], result)
+                  isaData[values['gender']].color[
+                    getIndexIsa(values['gender'], result)
                   ]
                 }`,
               }}
               className="isa__text-result"
             >
               {
-                isaData[values["gender"]].textVerdict[
-                  getIndexIsa(values["gender"], result)
+                isaData[values['gender']].textVerdict[
+                  getIndexIsa(values['gender'], result)
                 ]
               }
             </p>
@@ -136,21 +133,21 @@ function Isa() {
           <div className="isa__header">
             <Title mod="title_center">Интерпретация</Title>
             <p className="isa__info">
-              ИСА = Общий тестостерон (нмоль/л){" "}
-              <span className="colored">[{values["testosterone"]}]</span> / ГСПГ
-              (нмоль/л) <span className="colored">[{values["gspg"]}]</span> x
+              ИСА = Общий тестостерон (нмоль/л){' '}
+              <span className="colored">[{values['testosterone']}]</span> / ГСПГ
+              (нмоль/л) <span className="colored">[{values['gspg']}]</span> x
               100.
             </p>
             <div className="table">
               <div className="table__column table__column_left">
-                {isaData[values["gender"]].numberVerdict.map((elem, index) => {
+                {isaData[values['gender']].numberVerdict.map((elem, index) => {
                   return (
                     <p
                       key={index}
                       className={`table__row ${
-                        index === getIndexIsa(values["gender"], result) &&
-                        values["gender"] !== "Женщина" &&
-                        "colored"
+                        index === getIndexIsa(values['gender'], result) &&
+                        values['gender'] !== 'Женщина' &&
+                        'colored'
                       }`}
                     >
                       {elem}
@@ -160,14 +157,14 @@ function Isa() {
               </div>
 
               <div className="table__column table__column_right">
-                {isaData[values["gender"]].textVerdict.map((elem, index) => {
+                {isaData[values['gender']].textVerdict.map((elem, index) => {
                   return (
                     <p
                       key={index}
                       className={`table__row ${
-                        index === getIndexIsa(values["gender"], result) &&
-                        values["gender"] !== "Женщина" &&
-                        "colored"
+                        index === getIndexIsa(values['gender'], result) &&
+                        values['gender'] !== 'Женщина' &&
+                        'colored'
                       }`}
                     >
                       {elem}

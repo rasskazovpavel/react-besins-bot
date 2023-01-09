@@ -1,9 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
-import Title from "../../components/Title/Title.jsx";
-import Button from "../../components/Button/Button.jsx";
-import RadioInput from "../../components/RadioInput/RadioInput.jsx";
+import React, { useState, useRef, useEffect } from 'react';
+import { Title, Button, RadioInput } from '../../components';
 
-import useFormValidation from "../../hooks/useFormValidation";
+import useFormValidation from '../../hooks/useFormValidation';
 
 import {
   calendarVariants,
@@ -11,9 +9,9 @@ import {
   addDays,
   getWeekWord,
   formatDateForDatePicker,
-} from "../../utils/constants";
+} from '../../utils/constants';
 
-import "./Calendar.css";
+import './Calendar.css';
 
 let addedDays = null;
 let progress = null;
@@ -48,7 +46,7 @@ function Calendar() {
             e.preventDefault();
             const conceptionDate = new Date(dateValue);
             // Вычисляем др
-            values["type-date"] === "По менструации"
+            values['type-date'] === 'По менструации'
               ? (addedDays = 280)
               : (addedDays = 266);
             birthday = addDays(dateValue, addedDays);
@@ -58,8 +56,8 @@ function Calendar() {
                 (1000 * 3600 * 24)
             );
             if (differenceDays < 0) {
-              console.log("Выбрана прошедшая дата");
-              if (values["type-date"] === "По дате зачатия") {
+              console.log('Выбрана прошедшая дата');
+              if (values['type-date'] === 'По дате зачатия') {
                 differenceDays -= 14;
               }
               // Ребенок уже родился
@@ -80,13 +78,13 @@ function Calendar() {
               }
             } else if (differenceDays === 0) {
               setShowWeekResult(true);
-              console.log("Выбрана сегодняшняя дата");
+              console.log('Выбрана сегодняшняя дата');
               progress = 0;
               currWeek = 1;
               differenceDays = 1;
             } else {
               setShowWeekResult(false);
-              console.log("Выбрана будущая дата");
+              console.log('Выбрана будущая дата');
               progress = null;
               currWeek = null;
               differenceDays = 0;
@@ -121,13 +119,13 @@ function Calendar() {
               name="date"
               onChange={(e) => {
                 setDateValue(e.target.value);
-                setIsDateChanged(values["type-date"] && true);
+                setIsDateChanged(values['type-date'] && true);
               }}
-              value={dateValue || ""}
+              value={dateValue || ''}
             />
           </div>
           <div className="calendar__footer">
-            <Button valid={isFormValid && values["type-date"]}>
+            <Button valid={isFormValid && values['type-date']}>
               Рассчитать
             </Button>
           </div>
@@ -151,7 +149,7 @@ function Calendar() {
             </p>
             {showWeekResult && (
               <p className="calendar__date-txt">
-                Срок беременности:{" "}
+                Срок беременности:{' '}
                 <span className="colored">
                   {result.week} {getWeekWord(result.week)}
                 </span>
