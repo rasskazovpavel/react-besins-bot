@@ -18,6 +18,9 @@ const OvulationCalendar = React.lazy(() =>
 const Registration = React.lazy(() =>
   import("./pages/Registration/Registration.jsx")
 );
+const Feedback = React.lazy(() =>
+  import("./pages/Feedback/Feedback.jsx")
+);
 
 function App() {
   const { tg } = useTelegram();
@@ -107,7 +110,16 @@ function App() {
               </React.Suspense>
             }
           />
+          <Route
+            path="feedback"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Feedback />
+              </React.Suspense>
+            }
+          />
         </Routes>
+        
       </HashRouter>
     </div>
   );
