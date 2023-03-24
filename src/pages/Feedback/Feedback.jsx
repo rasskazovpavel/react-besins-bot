@@ -2,14 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import isEmail from 'validator/es/lib/isEmail';
 import isMobilePhone from 'validator/es/lib/isMobilePhone';
 
-import { Title, Input, Checkbox } from '../../components';
+import { Title, Input, Checkbox, CheckboxTxt } from '../../components';
 
 import useFormValidation from '../../hooks/useFormValidation';
 import { useTelegram } from '../../hooks/useTelegram.js';
 
 import './Feedback.css';
 
-const NUMBER_INPUT_COUNT = 5;
+const NUMBER_INPUT_COUNT = 4;
 
 export default function Feedback() {
   const [check, setCheck] = useState(false);
@@ -70,39 +70,14 @@ export default function Feedback() {
         onSubmit={(e) => e.preventDefault()}
       >
         <div className="feedback__header">
-          <Title>Регистрация</Title>
-          <Input
-            label="Фамилия"
-            name="lastName"
-            onChange={handleChange}
-            values={values}
-            setValues={setValues}
-            type="string"
-          />
+          <Title>Форма обратной связи</Title>
           <Input
             label="Имя"
-            name="firstName"
+            name="name"
             onChange={handleChange}
             values={values}
             setValues={setValues}
             type="string"
-          />
-          <Input
-            label="Отчество"
-            name="middleName"
-            onChange={handleChange}
-            values={values}
-            setValues={setValues}
-            type="string"
-          />
-          <Input
-            label="Номер телефона"
-            name="phone"
-            onChange={handleChange}
-            values={values}
-            setValues={setValues}
-            type="tel"
-            placeholder={'Формат: 89997776655'}
           />
           <Input
             label="Почта"
@@ -112,8 +87,27 @@ export default function Feedback() {
             setValues={setValues}
             type="email"
           />
+          <Input
+            label="Телефон"
+            name="phone"
+            onChange={handleChange}
+            values={values}
+            setValues={setValues}
+            type="tel"
+            placeholder={'Формат: 89997776655'}
+          />
+          <div className="textarea">
+            <label className="textarea__label">Сообщение</label>
+            <textarea
+              className="textarea__field"
+              name="feedback"
+              values={values}
+              setValues={setValues}
+              onChange={handleChange}
+            />
+          </div>
           <Checkbox
-            text="Даю согласие на обработку персональных данных"
+            text={<CheckboxTxt />}
             id="agree"
             name="agree"
             onChange={() => setCheck(!check)}

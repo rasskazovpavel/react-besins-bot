@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import isEmail from 'validator/es/lib/isEmail';
 import isMobilePhone from 'validator/es/lib/isMobilePhone';
 
-import { Title, Input, Checkbox } from '../../components';
+import { Title, Input, Checkbox, CheckboxTxt } from '../../components';
 
 import useFormValidation from '../../hooks/useFormValidation';
 import { useTelegram } from '../../hooks/useTelegram.js';
@@ -113,7 +113,7 @@ export default function Registration() {
             type="email"
           />
           <Checkbox
-            text="Даю согласие на обработку персональных данных"
+            text={<CheckboxTxt />}
             id="agree"
             name="agree"
             onChange={() => setCheck(!check)}
