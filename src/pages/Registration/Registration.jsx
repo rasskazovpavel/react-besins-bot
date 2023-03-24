@@ -17,7 +17,7 @@ export default function Registration() {
   const { tg } = useTelegram();
 
   const onSendData = useCallback(() => {
-    const data = values;
+    const data = { formType: 'reg', ...values };
     tg.sendData(JSON.stringify(data));
   }, [values, tg]);
 
