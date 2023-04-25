@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import "./Checkbox.css";
+import './Checkbox.css';
 
-function Checkbox({ text, id, onChange, value, name }) {
+const Checkbox = ({ text, id, onChange, value, name }) => {
   return (
     <label className="checkbox" htmlFor={`checkbox${id}`}>
       {text}
@@ -16,6 +16,6 @@ function Checkbox({ text, id, onChange, value, name }) {
       <span className="checkbox__mark"></span>
     </label>
   );
-}
+};
 
 export default Checkbox;

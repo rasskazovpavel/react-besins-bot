@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import isEmail from 'validator/es/lib/isEmail';
 import isMobilePhone from 'validator/es/lib/isMobilePhone';
 
@@ -13,13 +13,33 @@ const NUMBER_INPUT_COUNT = 5;
 
 export default function Registration() {
   const [check, setCheck] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(true);
   const { handleChange, values, setValues } = useFormValidation();
   const { tg } = useTelegram();
+  const lastElemForm = useRef(null);
+
+  const scrollToBottom = () =>
+    lastElemForm.current?.scrollIntoView({ behavior: 'smooth' });
 
   const onSendData = useCallback(() => {
-    const data = { formType: 'reg', ...values };
-    tg.sendData(JSON.stringify(data));
-  }, [values, tg]);
+    const checkValidity = () => {
+      return (
+        !Object.values(values).includes('') &&
+        Object.keys(values).length === NUMBER_INPUT_COUNT &&
+        check &&
+        isEmail(values['mail']) &&
+        isMobilePhone(values['phone'], 'ru-RU')
+      );
+    };
+
+    if (!checkValidity()) {
+      scrollToBottom();
+      setIsFormValid(false);
+    } else {
+      const data = { formType: 'reg', ...values };
+      tg.sendData(JSON.stringify(data));
+    }
+  }, [values, tg, check]);
 
   useEffect(() => {
     tg.onEvent('mainButtonClicked', onSendData);
@@ -36,31 +56,21 @@ export default function Registration() {
     });
   }, [tg.MainButton]);
 
-  useEffect(() => {
-    const checkValidity = () => {
-      return (
-        !Object.values(values).includes('') &&
-        Object.keys(values).length === NUMBER_INPUT_COUNT &&
-        check &&
-        isEmail(values['mail']) &&
-        isMobilePhone(values['phone'], 'ru-RU')
-      );
-    };
-
-    if (checkValidity()) {
-      tg.MainButton.enable();
-      tg.MainButton.setParams({
-        text: 'Зарегистрироваться',
-        color: '#4e5994',
-      });
-    } else {
-      tg.MainButton.disable();
-      tg.MainButton.setParams({
-        text: 'Зарегистрироваться',
-        color: '#858585',
-      });
-    }
-  }, [values, tg.MainButton, check]);
+  // useEffect(() => {
+  //   if (checkValidity()) {
+  //     tg.MainButton.enable();
+  //     tg.MainButton.setParams({
+  //       text: 'Зарегистрироваться',
+  //       color: '#4e5994',
+  //     });
+  //   } else {
+  //     tg.MainButton.disable();
+  //     tg.MainButton.setParams({
+  //       text: 'Зарегистрироваться',
+  //       color: '#858585',
+  //     });
+  //   }
+  // }, [values, tg.MainButton, check]);
 
   return (
     <>
@@ -78,6 +88,7 @@ export default function Registration() {
             values={values}
             setValues={setValues}
             type="string"
+            marked
           />
           <Input
             label="Имя"
@@ -86,6 +97,7 @@ export default function Registration() {
             values={values}
             setValues={setValues}
             type="string"
+            marked
           />
           <Input
             label="Отчество"
@@ -94,6 +106,7 @@ export default function Registration() {
             values={values}
             setValues={setValues}
             type="string"
+            marked
           />
           <Input
             label="Номер телефона"
@@ -103,6 +116,7 @@ export default function Registration() {
             setValues={setValues}
             type="tel"
             placeholder={'Формат: 89997776655'}
+            marked
           />
           <Input
             label="Почта"
@@ -111,6 +125,7 @@ export default function Registration() {
             values={values}
             setValues={setValues}
             type="email"
+            marked
           />
           <Checkbox
             text={<CheckboxTxt />}
@@ -119,6 +134,16 @@ export default function Registration() {
             onChange={() => setCheck(!check)}
             value={check}
           />
+
+          <span
+            className={`registration__note ${
+              !isFormValid && 'registration__error_visible'
+            }`}
+            ref={lastElemForm}
+          >
+            Пожалуйста, проверьте правильность заполнения полей, отмеченные
+            звездочкой (<span className="marked">*</span>)
+          </span>
         </div>
       </form>
     </>

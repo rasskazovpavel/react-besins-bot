@@ -1,6 +1,6 @@
-import "./Input.css";
+import './Input.css';
 
-import arrow from "../../images/arrow.png";
+import arrow from '../../images/arrow.png';
 
 function Input({
   label,
@@ -9,28 +9,32 @@ function Input({
   values,
   setValues,
   mod,
-  type = "number",
+  type = 'number',
   placeholder,
+  marked = false
 }) {
   return (
     <div className={`input app__input ${mod && mod}`}>
-      <label className="input__label">{label}</label>
+      <label className="input__label">
+        {label}
+        {marked && <span className="input__label-required"> *</span>}
+      </label>
       <input
         className="input__field"
-        value={values[name] || ""}
+        value={values[name] || ''}
         onChange={onChange}
         min="0"
-        placeholder={placeholder ? placeholder : type === "number" ? "0" : ""}
+        placeholder={placeholder ? placeholder : type === 'number' ? '0' : ''}
         name={name}
         required
         type={type}
       />
-      {type === "number" && (
+      {type === 'number' && (
         <div
           className="arrow arrow_up"
           onClick={() => {
             if (values[name] === undefined) {
-              setValues({ ...values, [name]: "1" });
+              setValues({ ...values, [name]: '1' });
             } else {
               setValues({
                 ...values,
@@ -42,13 +46,13 @@ function Input({
           <img className="arrow__image" src={arrow} alt="arrow" />
         </div>
       )}
-      {type === "number" && (
+      {type === 'number' && (
         <div
           className="arrow arrow_down"
           onClick={() => {
             setValues({
               ...values,
-              [name]: values[name] > 0 ? String(Number(values[name]) - 1) : "0",
+              [name]: values[name] > 0 ? String(Number(values[name]) - 1) : '0',
             });
           }}
         >

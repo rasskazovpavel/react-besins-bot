@@ -13,3 +13,18 @@
   display: flex;
   gap: 1px;
 }
+
+.registration__note {
+  color: grey;
+  padding-bottom: 20px;
+  font-size: 20px;
+  opacity: 0;
+}
+
+.registration__error_visible {
+  opacity: 1;
+}
+
+.marked {
+  color: red;
+}

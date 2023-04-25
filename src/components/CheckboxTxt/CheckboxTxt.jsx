@@ -13,6 +13,7 @@ function CheckboxTxt() {
         rel="noreferrer"
       >
         Политикой об обработке и защите персональных данных
+        <span className="checkbot-txt__mark"> *</span>
       </a>
     </p>
   );

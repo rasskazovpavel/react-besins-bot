@@ -63,3 +63,7 @@ input::-webkit-inner-spin-button {
   transform: rotate(180deg);
   top: 10px;
 }
+
+.input__label-required {
+  color: red;
+}
