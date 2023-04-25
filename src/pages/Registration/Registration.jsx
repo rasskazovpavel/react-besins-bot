@@ -9,7 +9,7 @@ import { useTelegram } from '../../hooks/useTelegram.js';
 
 import './Registration.css';
 
-const NUMBER_INPUT_COUNT = 5;
+// const NUMBER_INPUT_COUNT = 5;
 
 export default function Registration() {
   const [check, setCheck] = useState(false);
@@ -24,11 +24,11 @@ export default function Registration() {
   const onSendData = useCallback(() => {
     const checkValidity = () => {
       return (
-        !Object.values(values).includes('') &&
-        Object.keys(values).length === NUMBER_INPUT_COUNT &&
-        check &&
+        values['firstName'] &&
+        values['lastName'] &&
+        isMobilePhone(values['phone'], 'ru-RU') &&
         isEmail(values['mail']) &&
-        isMobilePhone(values['phone'], 'ru-RU')
+        check
       );
     };
 
@@ -106,7 +106,6 @@ export default function Registration() {
             values={values}
             setValues={setValues}
             type="string"
-            marked
           />
           <Input
             label="Номер телефона"
