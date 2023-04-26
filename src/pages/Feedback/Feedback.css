@@ -39,3 +39,18 @@
 .checkbox-txt__link {
   color: #4e5994;
 }
+
+.feedback__note {
+  color: grey;
+  padding-bottom: 20px;
+  font-size: 20px;
+  opacity: 0;
+}
+
+.feedback__note_visible {
+  opacity: 1;
+}
+
+.marked {
+  color: red;
+}

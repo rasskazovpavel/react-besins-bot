@@ -136,7 +136,7 @@ export default function Registration() {
 
           <span
             className={`registration__note ${
-              !isFormValid && 'registration__error_visible'
+              !isFormValid && 'registration__note_visible'
             }`}
             ref={lastElemForm}
           >

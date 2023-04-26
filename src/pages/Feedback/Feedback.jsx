@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import isEmail from 'validator/es/lib/isEmail';
 import isMobilePhone from 'validator/es/lib/isMobilePhone';
 
@@ -9,17 +9,37 @@ import { useTelegram } from '../../hooks/useTelegram.js';
 
 import './Feedback.css';
 
-const NUMBER_INPUT_COUNT = 4;
+// const NUMBER_INPUT_COUNT = 4;
 
 export default function Feedback() {
   const [check, setCheck] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(true);
   const { handleChange, values, setValues } = useFormValidation();
   const { tg } = useTelegram();
+  const lastElemForm = useRef(null);
+
+  const scrollToBottom = () =>
+    lastElemForm.current?.scrollIntoView({ behavior: 'smooth' });
 
   const onSendData = useCallback(() => {
-    const data = { formType: 'feed', ...values };
-    tg.sendData(JSON.stringify(data));
-  }, [values, tg]);
+    const checkValidity = () => {
+      return (
+        values['name'] &&
+        values['feedback'] &&
+        isMobilePhone(values['phone'], 'ru-RU') &&
+        isEmail(values['mail']) &&
+        check
+      );
+    };
+
+    if (!checkValidity()) {
+      scrollToBottom();
+      setIsFormValid(false);
+    } else {
+      const data = { formType: 'feed', ...values };
+      tg.sendData(JSON.stringify(data));
+    }
+  }, [values, tg, check]);
 
   useEffect(() => {
     tg.onEvent('mainButtonClicked', onSendData);
@@ -36,31 +56,31 @@ export default function Feedback() {
     });
   }, [tg.MainButton]);
 
-  useEffect(() => {
-    const checkValidity = () => {
-      return (
-        !Object.values(values).includes('') &&
-        Object.keys(values).length === NUMBER_INPUT_COUNT &&
-        check &&
-        isEmail(values['mail']) &&
-        isMobilePhone(values['phone'], 'ru-RU')
-      );
-    };
+  // useEffect(() => {
+  //   const checkValidity = () => {
+  //     return (
+  //       !Object.values(values).includes('') &&
+  //       Object.keys(values).length === NUMBER_INPUT_COUNT &&
+  //       check &&
+  //       isEmail(values['mail']) &&
+  //       isMobilePhone(values['phone'], 'ru-RU')
+  //     );
+  //   };
 
-    if (checkValidity()) {
-      tg.MainButton.enable();
-      tg.MainButton.setParams({
-        text: 'Отправить',
-        color: '#4e5994',
-      });
-    } else {
-      tg.MainButton.disable();
-      tg.MainButton.setParams({
-        text: 'Отправить',
-        color: '#858585',
-      });
-    }
-  }, [values, tg.MainButton, check]);
+  //   if (checkValidity()) {
+  //     tg.MainButton.enable();
+  //     tg.MainButton.setParams({
+  //       text: 'Отправить',
+  //       color: '#4e5994',
+  //     });
+  //   } else {
+  //     tg.MainButton.disable();
+  //     tg.MainButton.setParams({
+  //       text: 'Отправить',
+  //       color: '#858585',
+  //     });
+  //   }
+  // }, [values, tg.MainButton, check]);
 
   return (
     <>
@@ -78,6 +98,7 @@ export default function Feedback() {
             values={values}
             setValues={setValues}
             type="string"
+            marked
           />
           <Input
             label="Почта"
@@ -86,6 +107,7 @@ export default function Feedback() {
             values={values}
             setValues={setValues}
             type="email"
+            marked
           />
           <Input
             label="Телефон"
@@ -95,6 +117,7 @@ export default function Feedback() {
             setValues={setValues}
             type="tel"
             placeholder={'Формат: 89997776655'}
+            marked
           />
           <div className="textarea">
             <label className="textarea__label">Сообщение</label>
@@ -113,6 +136,16 @@ export default function Feedback() {
             onChange={() => setCheck(!check)}
             value={check}
           />
+
+          <span
+            className={`feedback__note ${
+              !isFormValid && 'feedback__note_visible'
+            }`}
+            ref={lastElemForm}
+          >
+            Пожалуйста, проверьте правильность заполнения полей, отмеченные
+            звездочкой (<span className="marked">*</span>)
+          </span>
         </div>
       </form>
     </>
