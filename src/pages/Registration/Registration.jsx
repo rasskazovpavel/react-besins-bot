@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import isEmail from 'validator/es/lib/isEmail';
 import isMobilePhone from 'validator/es/lib/isMobilePhone';
 
@@ -9,37 +9,63 @@ import { useTelegram } from '../../hooks/useTelegram.js';
 
 import './Registration.css';
 
-// const NUMBER_INPUT_COUNT = 5;
-
 export default function Registration() {
   const [check, setCheck] = useState(false);
   const [isFormValid, setIsFormValid] = useState(true);
+  const [errors, setErrors] = useState([]);
   const { handleChange, values, setValues } = useFormValidation();
   const { tg } = useTelegram();
-  const lastElemForm = useRef(null);
-
-  const scrollToBottom = () =>
-    lastElemForm.current?.scrollIntoView({ behavior: 'smooth' });
 
   const onSendData = useCallback(() => {
     const checkValidity = () => {
-      return (
-        values['firstName'] &&
-        values['lastName'] &&
-        isMobilePhone(values['phone'], 'ru-RU') &&
-        isEmail(values['mail']) &&
-        check
-      );
+      const errorsArr = [];
+      if (!values['firstName']) {
+        errorsArr.push('firstName');
+      }
+      if (!values['lastName']) {
+        errorsArr.push('lastName');
+      }
+      if (
+        (values['phone'] && !isMobilePhone(values['phone'], 'ru-RU')) ||
+        !values['phone']
+      ) {
+        errorsArr.push('phone');
+      }
+      if ((values['mail'] && !isEmail(values['mail'])) || !values['mail']) {
+        errorsArr.push('mail');
+      }
+      if (!check) errorsArr.push('agree');
+
+      setErrors(errorsArr);
+      if (errorsArr.length === 0 && check) {
+        return true;
+      } else {
+        return false;
+      }
     };
 
-    if (!checkValidity()) {
-      scrollToBottom();
-      setIsFormValid(false);
-    } else {
+    if (checkValidity()) {
+      console.log('Valid');
+      setIsFormValid(true);
       const data = { formType: 'reg', ...values };
       tg.sendData(JSON.stringify(data));
+    } else {
+      console.log('Invalid');
+      setIsFormValid(false);
     }
   }, [values, tg, check]);
+
+  useEffect(() => {
+    if (!isFormValid) {
+      const offset =
+      document.querySelector('.input__field_incorrect')?.getBoundingClientRect()
+        ?.top +
+      window.pageYOffset -
+      40;
+    window.scrollTo(0, offset);
+    }
+    
+  }, [errors, isFormValid]);
 
   useEffect(() => {
     tg.onEvent('mainButtonClicked', onSendData);
@@ -89,6 +115,7 @@ export default function Registration() {
             setValues={setValues}
             type="string"
             marked
+            errors={errors}
           />
           <Input
             label="Имя"
@@ -98,6 +125,7 @@ export default function Registration() {
             setValues={setValues}
             type="string"
             marked
+            errors={errors}
           />
           <Input
             label="Отчество"
@@ -106,6 +134,7 @@ export default function Registration() {
             values={values}
             setValues={setValues}
             type="string"
+            errors={errors}
           />
           <Input
             label="Номер телефона"
@@ -116,6 +145,7 @@ export default function Registration() {
             type="tel"
             placeholder={'Формат: 89997776655'}
             marked
+            errors={errors}
           />
           <Input
             label="Почта"
@@ -125,6 +155,7 @@ export default function Registration() {
             setValues={setValues}
             type="email"
             marked
+            errors={errors}
           />
           <Checkbox
             text={<CheckboxTxt />}
@@ -132,13 +163,13 @@ export default function Registration() {
             name="agree"
             onChange={() => setCheck(!check)}
             value={check}
+            errors={errors}
           />
 
           <span
             className={`registration__note ${
               !isFormValid && 'registration__note_visible'
             }`}
-            ref={lastElemForm}
           >
             Пожалуйста, проверьте правильность заполнения полей, отмеченные
             звездочкой (<span className="marked">*</span>)

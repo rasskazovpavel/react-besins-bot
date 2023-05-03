@@ -11,7 +11,8 @@ function Input({
   mod,
   type = 'number',
   placeholder,
-  marked = false
+  marked = false,
+  errors,
 }) {
   return (
     <div className={`input app__input ${mod && mod}`}>
@@ -20,7 +21,7 @@ function Input({
         {marked && <span className="input__label-required"> *</span>}
       </label>
       <input
-        className="input__field"
+        className={`input__field ${errors.includes(name) ? 'input__field_incorrect' : ''}`}
         value={values[name] || ''}
         onChange={onChange}
         min="0"

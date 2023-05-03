@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Checkbox.css';
 
-const Checkbox = ({ text, id, onChange, value, name }) => {
+const Checkbox = ({ text, id, onChange, value, name, errors }) => {
   return (
     <label className="checkbox" htmlFor={`checkbox${id}`}>
       {text}
@@ -13,7 +13,11 @@ const Checkbox = ({ text, id, onChange, value, name }) => {
         name={name ? name : value}
         onChange={onChange}
       />
-      <span className="checkbox__mark"></span>
+      <span
+        className={`checkbox__mark ${
+          errors.includes(name) && !value ? 'input__field_incorrect' : ''
+        }`}
+      ></span>
     </label>
   );
 };

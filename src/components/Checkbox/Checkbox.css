@@ -33,6 +33,10 @@
   background-color: #bec5e9;
 }
 
+.input__field_incorrect {
+  border: 2px solid red;
+}
+
 .checkbox:hover input ~ .checkbox__mark {
   background-color: #929abe;
 }

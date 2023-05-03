@@ -22,6 +22,10 @@ input::-webkit-inner-spin-button {
   font-size: 19px;
 }
 
+.input__field_incorrect {
+  border: 2px solid red;
+}
+
 .input__label {
   font-weight: bold;
   font-size: 19px;

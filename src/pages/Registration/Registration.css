@@ -19,6 +19,7 @@
   padding-bottom: 20px;
   font-size: 20px;
   opacity: 0;
+  pointer-events: none;
 }
 
 .registration__note_visible {
