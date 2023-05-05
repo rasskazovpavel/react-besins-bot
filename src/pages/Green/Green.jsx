@@ -59,7 +59,7 @@ function Green() {
             })}
           </div>
           <div className="green__footer">
-            <Button valid={isFormValid}>Расчитать</Button>
+            <Button valid={isFormValid}>Рассчитать</Button>
           </div>
         </form>
       )}

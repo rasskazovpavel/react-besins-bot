@@ -74,7 +74,7 @@ function Vteo() {
             })}
           </div>
           <div className="vteo__footer">
-            <Button valid={isFormValid}>Расчитать</Button>
+            <Button valid={isFormValid}>Рассчитать</Button>
           </div>
         </form>
       )}{' '}
