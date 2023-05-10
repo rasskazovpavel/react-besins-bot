@@ -15,7 +15,7 @@ const Checkbox = ({ text, id, onChange, value, name, errors }) => {
       />
       <span
         className={`checkbox__mark ${
-          errors.includes(name) && !value ? 'input__field_incorrect' : ''
+          errors && errors.includes(name) && !value ? 'input__field_incorrect' : ''
         }`}
       ></span>
     </label>
